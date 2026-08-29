@@ -45,8 +45,8 @@
 \title{
   \textbf{TOS Network}\\[0.4em]
   \Large The Open System for the Agentic Internet\\[0.25em]
-  \large Typed, Authorized, Metered, Receipted and Settleable Operations\\
-  for Autonomous Agents
+  \large Foundational Infrastructure for the Agentic Internet\\[0.2em]
+  \normalsize Mission: Connect Every AI Agent
 }
 \author{TOS Network}
 \date{2026 Agentic Internet Edition}
@@ -55,40 +55,41 @@
 \maketitle
 
 \begin{abstract}
-AI agents are moving from assistants that recommend actions to economic actors that invoke
-services, spend budgets and coordinate across organizational boundaries. The interface layer
-is improving quickly, but a service endpoint and a payment instruction do not by themselves
-establish who an agent represents, what it may do, how much it may consume, what evidence it
-must return or how failure is resolved.
+AI agents are moving from assistants that recommend actions to autonomous participants that
+discover counterparties, negotiate terms, invoke services, spend bounded budgets and
+coordinate across organizational boundaries. Existing APIs, agent interfaces and payment
+rails are necessary, but they do not by themselves establish who an agent represents, what it
+may do, what both parties accepted, how execution is bounded, what evidence must be returned
+or how failure is resolved.
 
-TOS Network is being built as \textbf{The Open System for the Agentic Internet}: a portable
-authorization, metering, receipt and settlement layer through which independently operated
-agents can safely invoke one another and external services. TOS models meaningful Internet
-actions---including messaging, model and tool calls, storage, events, booking, commerce and
-physical-edge work---as versioned \textbf{Agentic Service Operations}. Each operation has an
-explicit identity, input and output contract, capability scope, replay domain, resource
-envelope, maximum budget, metering rules, receipt semantics and settlement policy.
+TOS Network is being built as the \textbf{foundational infrastructure---The Open System---for
+the Agentic Internet}. Its mission is \textbf{Connect Every AI Agent}. The common lifecycle is
+\textbf{Identity $\rightarrow$ Discovery $\rightarrow$ Intent $\rightarrow$ Negotiation
+$\rightarrow$ Agreement $\rightarrow$ Bounded Execution $\rightarrow$ Evidence/Receipt
+$\rightarrow$ Settlement}. An Intent expresses a revocable objective; it does not by itself
+create an obligation. An Agreement records the exact terms accepted by the relevant parties.
+Only then is work delegated to a bounded execution path.
 
-An \textbf{Agentic Service Opcode} is not a TVM instruction. It is the architectural name for
-a service-layer operation identifier that gives agents a shared vocabulary for economically
-accountable action; the normative field is \texttt{operation\_id}. Metering does not require
-a non-zero fee. Allowances, subscriptions, sponsorship, prepaid capacity and refundable bonds
-are valid policies. The invariant is that resource use and externally imposed cost remain
-bounded, attributable and enforceable.
+Agentic Service Operations are execution-layer primitives within this larger infrastructure,
+not the definition of TOS as a whole. Each versioned operation binds an input and output
+contract to capability scope, replay domain, resource envelope, maximum budget, metering,
+receipt semantics and settlement policy. Communication, model and tool calls, storage,
+events, software work, booking, commerce and physical-edge work can use the same accountable
+envelope while retaining domain-specific execution and safety rules.
 
-The commercial beachhead is deliberately narrower than the architecture: paid model and tool
-invocations across independent agent builders and providers, with Messenger and Mailbox as a
-second profile that stress-tests delegation, receipts and anti-abuse economics. TOS reuses
-HTTP, MCP, A2A, OpenAPI and compatible discovery systems rather than replacing them. Private
-payloads and workloads remain off-chain; shared authority, commitments, disputes and final
-settlement use TOS where counterparties need a tamper-resistant source of truth.
+TOS reuses HTTP, MCP, A2A, OpenAPI and compatible discovery systems rather than replacing
+them. Models may interpret user goals, but deterministic policy and explicit authority decide
+what can be accepted and executed. Providers retain control over admission, hardware, models,
+data, pricing and local safety. Private payloads and workloads remain off-chain; TOS Core is
+used for shared identity, commitments, disputes and final settlement where independent
+parties need a tamper-resistant source of truth.
 
 The implemented foundation, TOS Core, is an actor-model blockchain with native TVM execution,
 value-bearing asynchronous messages, masterchain-rooted consensus, dynamic sharding and
-ADNL/DHT/RLDP networking. The generic Agentic Operation Protocol, SDKs, conformance suite and
-most service profiles are partial or planned. Artificial Intelligence Proof of Work (AIPoW)
-is feature-gated off by default: token incentives must not substitute for product-market fit,
-organic paid demand or sustainable unit economics.
+ADNL/DHT/RLDP networking. The open Intent, Agreement and Agentic Operation protocols, SDKs,
+conformance suites and most service profiles are partial or planned. Artificial Intelligence
+Proof of Work (AIPoW) is feature-gated off by default: token incentives must not substitute
+for product-market fit, organic paid demand or sustainable unit economics.
 \end{abstract}
 
 \section*{Document Status}
@@ -104,14 +105,24 @@ still requires specification, implementation, conformance testing and independen
 
 \section{Executive Summary}
 
-Web2 gave software APIs, but APIs alone are not sufficient for autonomous agents.
+The Internet connected computers. TOS is being built to connect autonomous agents.
+
+TOS Network is the proposed foundational infrastructure for the Agentic Internet: an open
+system through which agents operated by different people, organizations and runtimes can find
+one another, communicate, form precise commitments, act within delegated limits, exchange
+evidence and settle outcomes. Its mission is:
+
+\begin{center}
+\textbf{Connect Every AI Agent.}
+\end{center}
 
 An API may describe how to format and transport a request, yet it usually does not provide a
-portable answer to the questions an autonomous agent must resolve before acting:
+portable answer to the questions autonomous counterparties must resolve before acting:
 
 \begin{itemize}
   \item who is making the request and under whose authority;
-  \item which exact operation and revision is being requested;
+  \item how a goal becomes a proposal and then a mutually accepted Agreement;
+  \item which exact operation and revision will execute that Agreement;
   \item what resources the operation may consume;
   \item how much the caller is willing and permitted to spend;
   \item how replay, expiry, cancellation and retries are bounded;
@@ -119,10 +130,19 @@ portable answer to the questions an autonomous agent must resolve before acting:
   \item how payment, refund, dispute and final settlement occur.
 \end{itemize}
 
-TOS Network is being built to standardize this missing layer. Its central abstraction is the
-\textbf{Agentic Service Operation}: a typed, authorized, metered, receipted and settleable
-action that can be implemented by independent providers without requiring them to share one
-application platform or one operator.
+TOS Network is being built to standardize this missing infrastructure. The primary lifecycle
+is not a payment call or an economic opcode in isolation:
+
+\begin{center}
+\texttt{Identity -> Discovery -> Intent -> Negotiation -> Agreement}\\
+\texttt{-> Bounded Execution -> Evidence/Receipt -> Settlement}
+\end{center}
+
+Identity establishes the accountable principal and its delegated authority. Discovery returns
+candidates, not permission. Intent expresses a revocable objective. Negotiation refines price,
+scope, timing, evidence and recourse. Agreement is the exact accepted commitment. Agentic
+Service Operations then provide typed, metered execution primitives. Evidence and Receipts
+support verification, reputation, dispute and final settlement.
 
 \begin{center}
 \fbox{\parbox{0.90\textwidth}{
@@ -133,21 +153,19 @@ application platform or one operator.
 }}
 \end{center}
 
-The architecture has five layers:
+The architecture has five interoperable planes:
 
 \begin{enumerate}
-  \item \textbf{TOS Core.} Actor execution, consensus, sharding, persistent identity,
-        value-bearing messages, payment, naming and authenticated networking.
-  \item \textbf{Agentic Operation Protocol.} Versioned operation identities, schemas,
-        capabilities, replay protection, resource envelopes, quotes, budgets, metering,
-        receipts, evidence, errors and settlement.
-  \item \textbf{Discovery and naming.} ARD-compatible publication and search, TOS DNS,
-        signed descriptors and independently operated registries.
-  \item \textbf{Provider runtimes and relays.} Agent runtimes, Messenger relays, Mailboxes,
-        model and tool servers, storage providers, search providers and owner-operated
-        terminals.
-  \item \textbf{Operation profiles.} Communication, compute, storage, events, commerce,
-        booking, human services and physical-edge intelligence.
+  \item \textbf{Trust and Settlement Plane.} TOS Core consensus, TVM, actor accounts,
+        commitments, assets, payments, disputes and finality.
+  \item \textbf{Identity and Operation Plane.} Agents, capabilities, Intent, Agreement,
+        versioned operations, authorization, metering, evidence and Receipts.
+  \item \textbf{Propagation and Discovery Plane.} Direct links, ADNL/DHT/RLDP, TOS DNS,
+        TOS Sites, Messenger, Mailbox, gateways, signed descriptors and plural indexes.
+  \item \textbf{Runtime and Provider Plane.} OpenFox, webTOS, third-party agent runtimes,
+        model and tool services, storage, search and owner-operated edge terminals.
+  \item \textbf{Application and Society Plane.} FreeCity, communication, software work,
+        commerce and other intent-native applications and institutions.
 \end{enumerate}
 
 Only TOS Core and several reusable actors are substantially implemented as common foundations.
@@ -158,18 +176,23 @@ application workloads, and adding a model, messenger feature, storage backend or
 profile must not require a consensus upgrade.
 
 TOS does not seek to replace HTTP, MCP, A2A, OpenAPI, ARD or application-specific protocols.
-Those systems can carry, describe or discover an interface. TOS adds the portable authority
-and economic contract around the action: who may call, within what limits, at what maximum
-cost, with what receipt and through what settlement path.
+Those systems can carry, describe or discover an interface. TOS adds portable identity,
+authority and commitment around the action: who may propose, what was accepted, who may call,
+within what limits, at what maximum cost, with what evidence and through what settlement path.
 
 \subsection{Strategic Positioning}
 
-The most compact positioning is:
+The stable top-level positioning is:
 
 \begin{quote}
-\textbf{TOS Network turns ordinary Internet actions into typed, authorized, metered,
-receipted and settleable operations for autonomous agents.}
+\textbf{TOS Network is the foundational infrastructure---The Open System---for the Agentic
+Internet.}
 \end{quote}
+
+The protocol-level expression is that TOS enables autonomous agents to discover,
+communicate, coordinate, transact, execute and settle across organizational and platform
+boundaries. The application-level expression is that an ordinary Internet action can become
+typed, authorized, metered, receipted and settleable.
 
 A useful architectural shorthand is that TOS provides the \textbf{economic syscall layer for
 the Agentic Internet}. This does not mean a TOS validator executes every external action as a
@@ -181,12 +204,13 @@ HTTP standardized transport. DNS standardized naming. OpenAPI, MCP and A2A descr
 forms of interface and interaction. ARD makes resources discoverable. TOS aims to standardize
 the economically accountable action that follows discovery.
 
-The unit of value is therefore a completed, policy-compliant Agentic Service Operation, not an
-hour of unidentified hardware, an unbounded API call or an unauthenticated message. A consumer
-requests an exact operation revision, input and output contract, deadline, region, data-egress
-policy, resource limit, maximum charge and evidence level. A provider or target agent decides
-whether it can safely admit the request, executes it under local policy, returns a signed
-receipt and settles according to the accepted policy.
+The unit of coordination is therefore an accepted, policy-compliant Agreement that may be
+fulfilled by one or more Agentic Service Operations. It is not an hour of unidentified
+hardware, an unbounded API call or an unauthenticated message. A consumer and provider agree
+on an exact operation revision, input and output contract, deadline, region, data-egress
+policy, resource limit, maximum charge, evidence level and recourse. The provider or target
+agent retains the right to apply local admission and safety policy, executes within the
+accepted bounds, returns a signed receipt and settles according to the Agreement.
 
 \subsection{Why Now}
 
@@ -220,10 +244,16 @@ enforceable contract around an autonomous action.
 \subsection{Beachhead, Expansion and Network Flywheel}
 
 The architecture is horizontal, but the go-to-market sequence must be narrow. The first
-commercial beachhead is \textbf{paid model and tool invocation}: an agent discovers an
-independent provider, receives a live quote, delegates a bounded budget, invokes a typed
-operation, verifies a signed usage receipt and settles without creating a bilateral account
-integration. This wedge has an immediate buyer, a measurable unit of work and a clear
+external acceptance target is \textbf{machine-checkable software work}: independent agents
+form an Agreement over an exact repository state, bounded task, tests, deliverables, evidence
+and recourse, then execute and verify the outcome without sharing one runtime. This profile
+exercises the full Intent-to-Settlement lifecycle and produces evidence that independent
+implementations can inspect.
+
+The first commercial service wedge is \textbf{paid model and tool invocation}: an agent
+discovers an independent provider, receives a live quote, delegates a bounded budget, invokes
+a typed operation, verifies a signed usage receipt and settles without creating a bilateral
+account integration. This wedge has an immediate buyer, a measurable unit of work and a clear
 comparison against API keys, monthly invoices and payment-only alternatives.
 
 Messenger and Mailbox form the second reference family. They are strategically useful because
@@ -237,7 +267,7 @@ internal privileged path would hide integration cost and weaken the evidence for
 External design partners should include at least one agent builder and multiple unrelated
 service providers whose requirements can shape the first frozen profile.
 
-If the beachhead works across independent implementations, the intended flywheel is:
+If these beachheads work across independent implementations, the intended flywheel is:
 
 \begin{center}
 \texttt{open operation definitions -> competing providers -> portable receipts}\\
@@ -333,8 +363,69 @@ and receipt layer, or if buyers do not value portable recourse, the addressable 
 network will be smaller. This is a structural thesis, not a claim about currently realized
 transaction volume, protocol revenue or token value.
 
-\section{From APIs to Agentic Operations}
+\section{From Intent to Settlement}
 \label{sec:operation-model}
+
+TOS treats an autonomous workflow as a sequence of distinct commitments. Collapsing these
+states into one ``agent request'' makes it difficult to determine when authority began, what
+was actually accepted, which evidence is relevant or whether payment is final.
+
+\begin{center}
+\texttt{Identity -> Discovery -> Intent -> Negotiation -> Agreement}\\
+\texttt{-> Bounded Execution -> Evidence/Receipt -> Settlement}
+\end{center}
+
+\subsection{Identity and Discovery}
+
+Identity identifies an agent, owner, provider, verifier or other principal and binds the keys,
+roles and delegation policy relevant to the workflow. An agent identity must not imply
+unrestricted owner authority. Key rotation, revocation, scope, expiry and delegation depth are
+part of the authority model.
+
+Discovery returns possible counterparties, capabilities, endpoints and operation profiles.
+It is informative rather than authoritative: appearing in a catalog, index, DHT record or
+search result does not prove current capacity, price, permission, trustworthiness or safety.
+Clients re-verify signed descriptors, capabilities, quotes and settlement destinations before
+committing funds or work.
+
+\subsection{Intent, Negotiation and Agreement}
+
+An \textbf{Intent} is a revocable expression of a desired outcome and constraints. It may name
+a task, deadline, budget ceiling, privacy policy, preferred evidence or acceptable providers,
+but it is not itself an authorization to spend or execute and does not create an obligation
+for another party.
+
+\textbf{Negotiation} converts an Intent into concrete proposals. Parties or their authorized
+agents can refine scope, price, inputs, outputs, resource ceilings, deadlines, cancellation,
+evidence, dispute forum and settlement method. A model may interpret natural-language goals
+and propose terms; deterministic policy must decide whether those terms fit the principal's
+authority and budget.
+
+An \textbf{Agreement} is the exact, authenticated set of terms accepted by the relevant
+parties. It binds identities, roles, selected operation revisions, capability references,
+payload or schema commitments, budgets, evidence policy, recourse and expiry. An Agreement
+may authorize one operation, a sequence, a conditional workflow or a reusable allowance. No
+implementation should infer acceptance merely from discovery, conversation, possession of an
+endpoint or an unsigned model output.
+
+\subsection{Bounded Execution, Evidence and Settlement}
+
+Agreement does not require validators to execute the real-world workload. Providers perform
+model inference, communication, storage, software work, database access and physical action
+off-chain under local admission, security and safety policy. Agentic Service Operations are
+the typed execution primitives used to carry out the accepted terms. Every externality---cost,
+compute, storage, delivery attempts, attention, retries or physical reach---is bounded by
+capability, quota, budget, bond or another enforceable policy.
+
+Evidence is evaluated only under the policy named by the Agreement. A Receipt records a
+signed statement about status, metered use, result commitments, evidence references and
+settlement state; it proves no more than its schema, signer and evidence policy authorize it
+to prove. A stored receipt is not a delivery receipt, an execution receipt is not necessarily
+a correctness proof, and a payment receipt is not proof that the underlying result was valid.
+
+Settlement applies the accepted payment, refund, bond, dispute and finality rules. It may use
+direct TOS transfers, escrow, prepaid balances, channels, batches, sponsorship or a zero-price
+allowance. The invariant is accountable completion, not a mandatory per-call fee.
 
 \subsection{Why an API Call Is Not an Agent Contract}
 
@@ -495,13 +586,11 @@ A profile may also define minimum charges, reservation charges, cancellation fee
 sponsorship or a refundable bond. The accepted quote and operation definition determine the
 meaning; a receipt cannot invent new dimensions after execution.
 
-\subsection{Canonical Operation Lifecycle}
+\subsection{Operation Execution Lifecycle}
 
 A common lifecycle allows different profiles to share tooling and reasoning:
 
 \begin{center}
-\texttt{DISCOVER}\\
-$\downarrow$\\
 \texttt{QUOTE}\\
 $\downarrow$\\
 \texttt{AUTHORIZE}\\
@@ -517,7 +606,8 @@ $\downarrow$\\
 \texttt{SETTLE}
 \end{center}
 
-Every step is asynchronous. A quote may expire. Authorization may fail after discovery.
+This is the execution sub-lifecycle of an accepted Agreement, not a substitute for Intent and
+negotiation. Every step is asynchronous. A quote may expire. Authorization may fail after discovery.
 Admission may reject an otherwise affordable call. Execution may return a partial result.
 Receipt verification may trigger dispute instead of settlement. These are explicit states,
 not hidden exceptions.
@@ -627,6 +717,14 @@ roles are distinct. Every state transition, resource reservation and transfer id
 authority. Discovery, possession of an endpoint and payment capacity do not grant execution
 authority.
 
+\subsection{Models Interpret; Deterministic Policy Authorizes}
+
+A model may translate natural language into an Intent, propose an execution plan or evaluate
+non-deterministic evidence. It must not silently expand capability, budget, target, delegation
+depth or physical reach. The accepted Agreement and deterministic policy checks remain the
+authority boundary. Ambiguity, unavailable evidence or policy conflict produces refusal,
+renegotiation or human escalation rather than inferred permission.
+
 \subsection{Meter the Externality}
 
 The initiator should fund or otherwise hold authorization for the resource and attention cost
@@ -646,7 +744,10 @@ evidence references that bind external work to accepted operations.
 Providers retain custody of hardware, data, models and operational policy. Encrypted
 communication payloads and private execution context remain outside public consensus. A
 physical terminal continues approved local work while disconnected and keeps blockchain
-consensus outside hard real-time and actuator-control loops.
+consensus outside hard real-time and actuator-control loops. Participation in TOS does not
+transfer ownership or control of a provider's infrastructure; the provider may reject work
+that violates current admission, legal, security, capacity or safety policy even when a quote
+or earlier Agreement exists, subject to the agreed cancellation, refund and recourse rules.
 
 \subsection{Bounded Resources and Recoverable Failure}
 
@@ -672,42 +773,50 @@ than treating a search index as authority.
 
 \section{System Architecture}
 
-\subsection{Five-Layer Architecture}
+\subsection{Five-Plane Infrastructure Architecture}
 
-TOS Network is designed as independently released layers. The separation limits consensus
-risk, permits operation profiles to evolve at application speed and keeps private workloads
-outside validator execution.
+TOS Network is designed as five interoperable planes with independently released components.
+The separation limits consensus risk, permits protocols and applications to evolve at their
+appropriate speed and keeps private workloads outside validator execution. A plane is a
+responsibility boundary, not a claim that every component is implemented or operated by one
+organization.
 
 \begin{longtable}{L{0.18\textwidth}L{0.35\textwidth}L{0.36\textwidth}}
 \toprule
-Layer & Responsibility & Delivery boundary \\
+Plane & Responsibility & Delivery boundary \\
 \midrule
 \endhead
-TOS Core &
-Consensus, TVM, actor accounts, value-bearing messages, generic contracts, wallet,
-cryptography, DNS and authenticated networking &
-Implemented and maintained in the \texttt{tos} repository \\
-Agentic Operation Protocol &
-Operation identifiers, schemas, capabilities, replay protection, quotes, resource envelopes,
-metering, receipts, evidence, error taxonomy and settlement &
-Partial foundations and planned common specification, SDKs and conformance suite \\
-Discovery and naming &
-ARD publication and search, TOS DNS, signed descriptors, endpoint binding, indexes and
-federated registries &
-Core naming primitives implemented; product and compatibility layers partial or planned \\
-Provider runtimes and relays &
-Agent runtimes, Messenger relays, Mailboxes, model and tool services, storage, search and
-owner-operated terminals &
-Independently released application repositories and operator infrastructure \\
-Operation profiles &
-Communication, compute, storage, events, commerce, booking, human services and physical edge &
-Independently versioned profile specifications and implementations \\
+Trust and Settlement &
+TOS Core consensus, TVM, actor accounts, value-bearing messages, contracts, assets, escrow,
+disputes, commitments and finality &
+Implemented foundations in the \texttt{tos} repository; production readiness remains subject
+to the stated release gates \\
+Identity and Operation &
+Agent and provider identity, ownership, capabilities, Intent, Agreement, versioned operations,
+authorization, replay protection, resource envelopes, metering, evidence and Receipts &
+Implemented reusable actors plus partial or planned open specifications, SDKs and conformance \\
+Propagation and Discovery &
+Direct communication, ADNL/DHT/RLDP, TOS DNS, TOS Sites, Messenger, Mailbox, ARD publication,
+gateways, signed descriptors, indexes and federated registries &
+Core network primitives implemented; common propagation, discovery and interoperability
+products are partial or planned \\
+Runtime and Provider &
+OpenFox, webTOS, third-party agent runtimes, model and tool services, storage, search,
+relays and owner-operated physical terminals &
+Independently released runtimes, adapters and operator infrastructure; providers retain local
+admission, pricing, data and safety authority \\
+Application and Society &
+FreeCity, communication, software work, commerce, booking, human services, communities and
+other intent-native applications and institutions &
+Application-specific state machines and interfaces built above the public infrastructure \\
 \bottomrule
 \end{longtable}
 
 Existing Agent, Service, Escrow, Registry, Dispute and Attestation actors remain reusable TOS
 Core foundations. Product-specific daemons, message payloads, model runtimes, catalogs and
-continuous device telemetry do not belong in the validator repository.
+continuous device telemetry do not belong in the validator repository. A Gateway, Carrier or
+Indexer may improve reachability and usability, but none is protocol authority for identity,
+capability, accepted Agreement, funds or final settlement.
 
 \subsection{The Economic Syscall Boundary}
 
@@ -1014,9 +1123,10 @@ resolution is bounded by contract balance and role checks.
 
 \subsection{Protocol Scope}
 
-The Agentic Operation Protocol is the common application plane above TOS Core. Its purpose is
-not to define every business workflow. It defines the portable contract around an operation
-so independent agents and providers can interoperate safely.
+The Agentic Operation Protocol is the common execution protocol within the Identity and
+Operation Plane above TOS Core. Its purpose is not to define every business workflow. It
+defines the portable contract through which an accepted Agreement authorizes one or more
+operations so independent agents and providers can interoperate safely.
 
 Independent implementations require canonical and versioned definitions for:
 
@@ -1307,6 +1417,71 @@ trusted intermediary \\
 The separation permits TOS to reuse open ecosystems rather than creating incompatible
 replacements. A resource discovered through ARD can expose MCP, A2A, OpenAPI, HTTPS or RLDP
 bindings while keeping the same TOS operation identity, capability and settlement semantics.
+
+\subsection{TOS and Bittensor}
+
+Bittensor is an important adjacent project, but the two systems begin from different primary
+problems. Bittensor describes itself as a framework or language for open, decentralized
+digital-commodity markets called subnets, organized under a shared token system and directed
+ultimately toward machine intelligence. Its official documentation describes independent
+subnets producing commodities such as compute, inference, storage and prediction: miners
+produce the commodity, validators score miners, subnet creators define incentive mechanisms
+and the chain pays participants in TAO according to contributed value.
+\footnote{Bittensor, ``The Bittensor Paradigm,''
+\url{https://www.bittensor.com/about}, and ``Bittensor Documentation,''
+\url{https://www.bittensor.com/docs}, accessed August 29, 2026. Bittensor terminology and
+functionality may evolve; this comparison uses those official descriptions and does not imply
+endorsement by either project.}
+
+TOS starts from the cross-agent coordination problem. It aims to provide identity,
+authorization, communication, discovery, Intent, Agreement, bounded execution, evidence,
+Receipts, dispute and settlement across independent agents and providers. Machine
+intelligence and digital commodities can be supplied through this infrastructure, but they
+are not the complete scope of the Agentic Internet.
+
+\begin{longtable}{L{0.19\textwidth}L{0.34\textwidth}L{0.36\textwidth}}
+\toprule
+Dimension & Bittensor & TOS Network \\
+\midrule
+\endhead
+Primary objective &
+Open markets that incentivize production and evaluation of digital commodities, culminating
+in machine intelligence &
+Open foundational infrastructure through which autonomous agents form accountable
+commitments and act across organizational boundaries \\
+Primary coordination unit &
+A subnet with its commodity, miners, validators and incentive mechanism &
+An authenticated lifecycle from Intent and Agreement through one or more bounded Operations,
+Evidence/Receipt and Settlement \\
+Evaluation &
+Subnet-specific validators score miners according to the incentive mechanism defined for the
+commodity &
+Agreement-specific evidence and verifier policies assess only declared claims; providers and
+principals retain local admission and trust policy \\
+Network organization &
+Multiple independent commodity subnets connected through Bittensor's chain and TAO system &
+Five interoperable planes spanning trust, identity, propagation, runtimes and applications,
+with plural providers, indexes, gateways and transports \\
+Blockchain role &
+Registers and coordinates the network and pays participants in TAO in proportion to the value
+recognized by its mechanisms &
+Provides shared actor state, commitments, escrow, disputes and final settlement where
+counterparties need a tamper-resistant source of truth \\
+Application scope &
+Digitally produced and evaluated commodities such as compute, inference, storage and
+prediction &
+Cross-agent communication and cooperation, including software work, commerce, booking,
+human services and physical-edge activity as well as compute and inference \\
+\bottomrule
+\end{longtable}
+
+The distinction is architectural, not a claim that the projects are mutually exclusive. A
+Bittensor-backed inference, storage, prediction or other subnet service can publish a TOS
+Capability and operation descriptor. A TOS agent can then discover that service, negotiate
+terms, form an Agreement, invoke it through its supported binding, collect the agreed evidence
+and Receipt, and settle under the chosen policy. In that composition, Bittensor can organize
+and incentivize a commodity network while TOS supplies the cross-agent identity, authority,
+commitment and accountability envelope around its use.
 
 \subsection{Agentic Resource Discovery Compatibility}
 
@@ -2734,6 +2909,10 @@ Access policy, pricing, rate limits, calls, responses and revenue \\
 Dispute and Proof Attestation foundations &
 \implemented &
 Compact resolution and evidence commitments \\
+Open Intent and Agreement model &
+\planned &
+Canonical Intent, proposal, acceptance, amendment, cancellation, Agreement and recourse
+schemas plus signature domains and conformance vectors \\
 Agentic Service Operation model &
 \partialstatus &
 Profile-specific operations and common concepts exist; the generic normative envelope,
@@ -2888,10 +3067,13 @@ cycles remain outside the validator.
 
 \subsection{Phase 0: Agentic Operation Specification}
 
-Freeze the common architecture with requirements from a first-party reference application,
+Freeze the common Intent, Agreement and Operation architecture with requirements from a first-party reference application,
 at least one external agent builder and multiple unrelated service providers:
 
 \begin{itemize}
+  \item canonical Intent, proposal, negotiation, Agreement, amendment, cancellation and
+        expiry semantics;
+  \item principal, role, authority, acceptance, evidence-policy and recourse bindings;
   \item operation identity, namespace and immutable revisioning;
   \item canonical request, quote, capability, usage, receipt and error envelopes;
   \item replay, expiry, idempotency, cancellation and restart rules;
@@ -2901,11 +3083,14 @@ at least one external agent builder and multiple unrelated service providers:
   \item conformance vectors and reference verifier.
 \end{itemize}
 
-\subsection{Phase 1: Compute Beachhead and Communication Validation}
+\subsection{Phase 1: Software and Compute Beachhead, Communication Validation}
 
-Deliver the paid model and tool profile as the initial commercial wedge:
+Deliver a machine-checkable software-work profile and the paid model and tool profile as the
+initial external-acceptance wedges:
 
 \begin{itemize}
+  \item software tasks whose agreed repository state, tests, artifacts and review evidence
+        can be checked by independent implementations;
   \item model and tool operations with live quotes, token/time/tool metering, bounded
         execution and signed usage receipts;
   \item a first-party agent application that uses only the public Agent SDK and operation
@@ -2991,59 +3176,64 @@ TOS does not aim to:
 
 \section{Conclusion}
 
-TOS Network is being built as \textbf{The Open System for the Agentic Internet}.
+TOS Network is being built as the \textbf{foundational infrastructure---The Open System---for
+the Agentic Internet}. Its mission is \textbf{Connect Every AI Agent}.
 
-Its purpose is not to execute every Internet service inside blockchain consensus. Its purpose
-is to give independently operated agents a common operation vocabulary and a common economic
-execution contract.
+The Internet connected computers through common protocols. The Agentic Internet requires an
+additional public layer through which autonomous participants can identify one another,
+discover capabilities, express goals, negotiate exact terms, act within delegated limits,
+exchange evidence and settle across organizational and platform boundaries.
 
-Under this model, a meaningful Internet action becomes a versioned operation with explicit
-identity, bounded authority, finite resource limits, a maximum budget, defined failure
-behavior, a verifiable receipt and a settlement path. Communication, model inference, tool
-invocation, storage, search, event delivery, commerce, booking, human services and
-physical-edge intelligence are different profiles of the same operation model.
+The primary TOS lifecycle is therefore:
+
+\begin{center}
+\texttt{Identity -> Discovery -> Intent -> Negotiation -> Agreement}\\
+\texttt{-> Bounded Execution -> Evidence/Receipt -> Settlement}.
+\end{center}
+
+Intent is not obligation. Discovery is not authority. Model interpretation is not policy
+approval. Agreement is the authenticated commitment that binds roles, scope, budget,
+evidence and recourse. Agentic Service Operations are the typed execution primitives that
+fulfill those commitments; they are an important part of TOS, not its final definition.
 
 Private payloads and workloads remain where they belong: in encrypted sessions, provider
-runtimes, local storage and owner-controlled terminals. TOS Core supplies shared actor state,
+runtimes, local storage and owner-controlled terminals. Providers retain sovereignty over
+admission, hardware, models, data, pricing and safety. TOS Core supplies shared actor state,
 value, commitments, disputes and final settlement where independent parties need a
 tamper-resistant source of truth.
 
-The architecture separates three layers that are often confused. TVM opcodes execute inside
-the deterministic blockchain VM. Contract message opcodes identify actor-level state
+The architecture separates three opcode layers that are often confused. TVM opcodes execute
+inside the deterministic blockchain VM. Contract message opcodes identify actor-level state
 transitions. Agentic Service Opcodes identify economically accountable external actions.
-Their shared name reflects a common insight---agents need a portable instruction vocabulary---
-not a requirement that every action run in one virtual machine.
+Their shared name reflects a portable instruction vocabulary, not a requirement that every
+action run in one virtual machine or that the operation layer define the whole network.
 
-Metering is equally important. It does not mean every trusted message or local action must
-incur a non-zero charge. It means no caller can impose unlimited storage, compute, delivery,
-attention or retry costs without identity, capability, quota, budget or bond. This is the
-foundation for open interoperability without making the Agentic Internet an open spam relay.
+Metering does not mean every trusted message or local action must incur a non-zero charge. It
+means no caller can impose unlimited storage, compute, delivery, attention or retry costs
+without identity, capability, quota, budget or bond. A Receipt proves only the claims defined
+by its schema, signer and evidence policy. These boundaries enable open interoperability
+without turning the Agentic Internet into an open spam or false-proof relay.
 
 TOS Core provides the implemented blockchain and networking substrate. Agent and task actors,
 capability and service foundations, profile-specific Messenger and Mailbox work, and the
-feature-gated AIPoW path establish important pieces. The open operation namespace, common
-envelopes, provider SDKs, communication and compute conformance, high-frequency settlement and
-additional profiles remain work to specify, implement, test and independently review.
+feature-gated AIPoW path establish important pieces. The open Intent and Agreement schemas,
+operation namespace, common envelopes, provider SDKs, cross-provider conformance,
+high-frequency settlement and additional profiles remain work to specify, implement, test
+and independently review.
 
-The investable thesis is simple but demanding. If agents become independent economic actors,
-the scarce layer shifts from generating intelligence to granting authority, bounding cost,
-verifying outcomes and resolving failure across organizations. A protocol that becomes the
-default contract for those actions can sit beneath many applications, providers and payment
-methods. TOS has a differentiated architecture for that outcome, but architecture alone is
-not a moat. The proof must come from a narrow compute beachhead, repeat organic demand,
-third-party embedding, cross-provider completion and a measured advantage for TOS settlement.
+Bittensor demonstrates a complementary path: open subnet markets can organize and reward the
+production of machine intelligence and other digital commodities. TOS addresses the broader
+cross-agent infrastructure that can connect such resources to agents, owners, applications
+and institutions through explicit identity, authority, Agreement, evidence and settlement.
 
-Token issuance follows that proof; it does not create it. AIPoW remains inactive until product,
-economic, security and decentralization gates are independently visible. This sequencing
-preserves the larger vision while keeping the next milestone concrete: enable one agent to
-buy one useful operation from an unrelated provider under a portable authority and receipt
-contract, then make that flow repeat across providers without special integration.
-
-Web2 standardized APIs for software. TOS aims to standardize economically accountable actions
-for autonomous agents.
+Architecture alone is not adoption. The proof must come from machine-checkable work, repeat
+organic demand, third-party embedding, cross-provider completion and a measured advantage for
+TOS coordination and settlement. Token issuance follows that proof; it does not create it.
+AIPoW remains inactive until product, economic, security and decentralization gates are
+independently visible.
 
 \begin{center}
-\textbf{Web2 gave machines APIs. TOS gives agents economic opcodes.}
+\textbf{The Internet connected computers. TOS connects autonomous agents.}
 \end{center}
 \section*{Copyright and License}
 
