@@ -67,5 +67,58 @@ This is a functional comparison, not investment advice or a claim of feature equ
 TOS status descriptions follow the current [TOS Network whitepaper](tos.pdf). Bittensor
 descriptions follow its official [network documentation](https://www.bittensor.com/docs),
 [subnet guide](https://www.bittensor.com/docs/guides/subnets) and
-[mining guide](https://www.bittensor.com/docs/guides/mining), reviewed on August 29, 2026.
+[mining guide](https://www.bittensor.com/docs/guides/mining), reviewed on August 30, 2026.
 Bittensor terminology and economics may change, and individual subnets can differ materially.
+
+## AIPoW and the Bittensor subnet analogy
+
+There is a useful analogy between TOS AIPoW and a Bittensor subnet, but it must be drawn at the
+right level. In Bittensor, a subnet owner defines the incentive mechanism: what miners should
+produce and how validators should score it. In TOS, the closest equivalent is not AIPoW as a
+whole. It is the combination of an **eligible Agentic Service Operation profile** and its
+**published, frozen scoring methodology**.
+
+That TOS methodology defines which settled work can qualify, which metering and evidence are
+required, how rate caps and quality factors apply, and which anti-collusion rules must pass
+before any score contributes to issuance.
+
+| Bittensor concept | Closest TOS AIPoW analogue | Important difference |
+| --- | --- | --- |
+| **Subnet** | An eligible work category and versioned Agentic Service Operation profile. | A TOS profile participates in the common cross-agent Agreement, Receipt and settlement lifecycle rather than defining a separate end-to-end economy. |
+| **Subnet owner-defined incentive mechanism** | A governance-approved, published and frozen scoring methodology, evidence policy and rate card. | No provider or scorer should be able to change the rules unilaterally during an epoch. |
+| **Miner** | An Agent or Provider that performs an eligible, independently settled operation. | A Provider can earn ordinary service revenue even when the operation receives zero AIPoW score. |
+| **Validator scoring miners** | Independent scorers, challengers and reviewers that recompute eligible work scores from finalized Receipts and evidence. | Production scorers should reproduce the same inputs, scores and Merkle root byte for byte; scorer-local judgment cannot directly mint TOS. |
+| **Validator weights and subnet reward calculation** | A bonded score commitment, public challenge window, approved review and deterministic epoch calculation. | TOS Core consensus verifies the finalized commitment and supply arithmetic; it does not decide whether an AI answer is intelligent. |
+| **Protocol emission to subnet participants** | Feature-gated, capped AIPoW issuance distributed after the challenge-complete score commitment. | AIPoW issuance is downstream of separately eligible, evidence-graded and settled demand and remains independent of the original service price. |
+| **Bittensor chain consensus** | TOS Core validator consensus. | Stake-bonded TOS validators secure chain state and finality. AIPoW provisions and rewards useful service capacity above consensus; AI work does not secure fork choice or block production. |
+
+The resulting TOS sequence is:
+
+```text
+Intent
+-> Agreement
+-> Paid or Authorized Execution
+-> Evidence / Receipt
+-> Settlement
+-> AIPoW Eligibility
+-> Deterministic Scoring
+-> Commitment and Challenge
+-> Consensus-Authorized Issuance
+```
+
+This ordering creates four important boundaries:
+
+1. **Demand precedes issuance.** AIPoW evaluates completed economic activity; it must not be
+   used to manufacture demand for the underlying service.
+2. **Payment and scoring are independent.** A valid paid operation may receive zero AIPoW
+   score, and an operation definition carries no automatic right to issuance.
+3. **Scorers evaluate but do not mint.** Off-chain scorers interpret published data and commit
+   reproducible results. Only a challenge-complete commitment and deterministic TOS Core
+   rules can authorize bounded issuance.
+4. **AIPoW is not blockchain consensus.** TOS Core consensus secures the ledger. AIPoW is an
+   optional service-capacity and community-distribution mechanism built above that ledger.
+
+For investors, the analogy highlights the same central diligence question found in a
+Bittensor subnet: **who defines useful work, and can the scoring rule resist manipulation?**
+TOS adds a further requirement: the work should arise from independently settled demand and
+portable evidence before it can become eligible for optional protocol issuance.
