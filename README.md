@@ -17,15 +17,39 @@ Identity -> Discovery -> Intent -> Negotiation -> Agreement
 
 An **Intent** is a revocable expression of a desired outcome. It does not by itself create an obligation or authorize spending. An **Agreement** is the exact, authenticated set of terms accepted by the relevant parties. One or more typed **Agentic Service Operations** can then execute that Agreement under explicit capability, resource, budget, evidence, and settlement rules.
 
-## Infrastructure planes
+## TOS Network architecture
 
-1. **Trust and Settlement Plane** - TOS Core consensus, TVM, actor accounts, assets, commitments, escrow, disputes, and finality.
-2. **Identity and Operation Plane** - identities, ownership, capabilities, Intent, Agreement, operations, authorization, metering, Evidence, and Receipts.
-3. **Propagation and Discovery Plane** - direct communication, ADNL/DHT/RLDP, TOS DNS, TOS Sites, Messenger, Mailbox, gateways, descriptors, and plural indexes.
-4. **Runtime and Provider Plane** - OpenFox, webTOS, third-party agent runtimes, model and tool services, storage, search, relays, and owner-operated terminals.
-5. **Application and Society Plane** - FreeCity, communication, software work, commerce, booking, human services, and other intent-native applications.
+TOS Network is one system composed of four interoperable infrastructure layers, surrounded by the participants and economies that use them:
 
-Blockchain provides shared trust and settlement. Providers perform real-world execution and retain control of admission, hardware, models, data, pricing, and local safety. TOS connects these components into an open Agentic Internet.
+![TOS Network layered architecture](tos-network-architecture.png)
+
+1. **Agent Access, Coordination and Discovery** - identity-aware access, authentication, delegated authorization, capability publication and search, matching, quoting, spending policy, Agreement formation, job coordination, events, and result delivery.
+2. **Autonomous Runtime and Provider Execution** - agent, provider, and worker runtimes; model, tool, API, compute, and device adapters; isolated execution; local admission and safety policy; resource accounting; Evidence, Receipt, and result generation.
+3. **Trust, Evidence and Economy** - identity and capability commitments, reputation references, escrow, payment, Receipt verification, proof, dispute, refund, settlement, and optional demand-aligned contribution incentives.
+4. **Decentralized Network Foundation** - validators, peer-to-peer propagation, consensus, the actor ledger, smart contracts, event logs, state synchronization, snapshots, and finality.
+
+Users, personal and enterprise agents, autonomous applications, machines, and service buyers enter through the access layer. Model, API, compute, storage, human, and physical-service providers connect through the runtime layer. Node operators, stakers, and governance participants maintain the decentralized foundation.
+
+Four flows cross the architecture:
+
+```text
+Request / Discovery: participant <-> access and coordination
+Job / Execution:     coordination <-> provider runtime
+Settlement / Value:  runtime and coordination <-> trust and economy
+Trust / State:       trust and economy <-> decentralized foundation
+```
+
+Private payloads and execution remain off-chain. Only the authority, commitments, evidence, disputes, and economic outcomes required by the accepted policy cross the shared trust boundary. A gateway may route, an index may rank, a runtime may execute, and a scorer may evaluate, but none can silently create owner authority or declare settlement final.
+
+The common end-to-end path is:
+
+```text
+Intent -> Authenticate -> Discover -> Match -> Quote -> Agreement
+       -> Invoke -> Bounded Execution -> Evidence / Receipt
+       -> Verify -> Settle or Dispute -> Return Result
+```
+
+When AIPoW is active, it consumes only separately eligible, evidence-graded, settled work after this path. It does not authorize requests, replace ordinary payment, or permit an off-chain scorer to mint value.
 
 ## Agentic operations
 
@@ -35,11 +59,9 @@ Metering does not require a non-zero fee. Allowances, subscriptions, sponsorship
 
 Private payloads and execution can remain off-chain. TOS is used where shared identity, authority, commitments, receipts, disputes, or final settlement require a tamper-resistant source of truth.
 
-## TOS and Bittensor
+## Investor materials
 
-[Bittensor](https://www.bittensor.com/about) describes an open network of subnets that produce digital commodities such as compute, inference, storage, and prediction. Miners produce a commodity, validators score miners, subnet creators define incentive mechanisms, and the chain pays participants in TAO according to recognized contribution.
-
-TOS addresses a broader cross-agent infrastructure problem: identity, authorization, communication, discovery, Intent, Agreement, bounded execution, Evidence/Receipt, dispute, and settlement across independent agents and providers. The systems can be complementary: a Bittensor-backed service can publish a TOS Capability and operation descriptor, then participate in a TOS Agreement and receipt flow.
+- [Investor comparison](INVESTOR_COMPARISON.md)
 
 ## Repository contents
 

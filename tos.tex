@@ -9,9 +9,11 @@
 \usepackage{booktabs}
 \usepackage{enumitem}
 \usepackage{geometry}
+\usepackage{graphicx}
 \usepackage{hyperref}
 \usepackage{longtable}
 \usepackage{microtype}
+\usepackage{pdflscape}
 \usepackage{xcolor}
 
 \geometry{margin=1in}
@@ -95,7 +97,7 @@ for product-market fit, organic paid demand or sustainable unit economics.
 \section*{Document Status}
 
 This paper describes both released foundations and architectural direction. ``Implemented''
-means the referenced repository contains the relevant node, contract, tooling or test
+means released code contains the relevant node, contract, tooling or test
 foundation. ``Partial'' means useful primitives or one profile-specific implementation exist,
 but the generic interoperable product surface is incomplete. ``Planned'' identifies work that
 still requires specification, implementation, conformance testing and independent review.
@@ -153,20 +155,29 @@ support verification, reputation, dispute and final settlement.
 }}
 \end{center}
 
-The architecture has five interoperable planes:
+The architecture has four interoperable infrastructure layers surrounded by the participants
+and economies that use them:
 
 \begin{enumerate}
-  \item \textbf{Trust and Settlement Plane.} TOS Core consensus, TVM, actor accounts,
-        commitments, assets, payments, disputes and finality.
-  \item \textbf{Identity and Operation Plane.} Agents, capabilities, Intent, Agreement,
-        versioned operations, authorization, metering, evidence and Receipts.
-  \item \textbf{Propagation and Discovery Plane.} Direct links, ADNL/DHT/RLDP, TOS DNS,
-        TOS Sites, Messenger, Mailbox, gateways, signed descriptors and plural indexes.
-  \item \textbf{Runtime and Provider Plane.} OpenFox, webTOS, third-party agent runtimes,
-        model and tool services, storage, search and owner-operated edge terminals.
-  \item \textbf{Application and Society Plane.} FreeCity, communication, software work,
-        commerce and other intent-native applications and institutions.
+  \item \textbf{Agent Access, Coordination and Discovery.} Identity-aware entry points,
+        authentication, authorization, capability publication and search, matching, quoting,
+        spending policy, Agreement formation, job coordination, events and result delivery.
+  \item \textbf{Autonomous Runtime and Provider Execution.} Agent runtimes, provider and
+        worker runtimes, protocol and tool adapters, isolated execution, resource accounting,
+        evidence capture and result generation.
+  \item \textbf{Trust, Evidence and Economy.} Identity and capability commitments,
+        reputation references, escrow, payment, Receipt verification, proof, dispute and
+        optional demand-aligned contribution incentives.
+  \item \textbf{Decentralized Network Foundation.} Validators, peer-to-peer propagation,
+        consensus, the immutable ledger, smart contracts, event logs, state synchronization
+        and finality.
 \end{enumerate}
+
+Users, personal and enterprise agents, autonomous applications and machines enter through the
+access layer. Model, API, compute, storage, human and physical-service providers connect to
+the runtime layer. Node operators, stakers and governance participants maintain the network
+foundation. Applications and institutions may compose all four layers without becoming a
+new source of protocol authority.
 
 Only TOS Core and several reusable actors are substantially implemented as common foundations.
 Profile-specific messaging and mailbox primitives exist, while the generic operation
@@ -773,48 +784,122 @@ than treating a search index as authority.
 
 \section{System Architecture}
 
-\subsection{Five-Plane Infrastructure Architecture}
+\subsection{Layered TOS Network Architecture}
 
-TOS Network is designed as five interoperable planes with independently released components.
-The separation limits consensus risk, permits protocols and applications to evolve at their
-appropriate speed and keeps private workloads outside validator execution. A plane is a
-responsibility boundary, not a claim that every component is implemented or operated by one
-organization.
+TOS Network is one system composed of four interoperable infrastructure layers. The layers
+separate coordination, execution, economic trust and decentralized state so that each can
+evolve at the appropriate speed. They are responsibility and authority boundaries, not
+repository boundaries and not a requirement that one organization operate the whole stack.
 
-\begin{longtable}{L{0.18\textwidth}L{0.35\textwidth}L{0.36\textwidth}}
+\clearpage
+\begin{landscape}
+\begin{figure}[p]
+\centering
+\includegraphics[width=0.98\linewidth]{tos-network-architecture.png}
+\caption{TOS Network as a layered infrastructure system. Private payloads and execution remain
+off-chain; bounded authority, commitments, evidence and economic outcomes cross the shared
+trust boundary only where required.}
+\label{fig:tos-layered-architecture}
+\end{figure}
+\end{landscape}
+\clearpage
+
+\begin{longtable}{L{0.20\textwidth}L{0.39\textwidth}L{0.30\textwidth}}
 \toprule
-Plane & Responsibility & Delivery boundary \\
+Layer & Primary responsibilities & Authority boundary \\
 \midrule
 \endhead
-Trust and Settlement &
-TOS Core consensus, TVM, actor accounts, value-bearing messages, contracts, assets, escrow,
-disputes, commitments and finality &
-Implemented foundations in the \texttt{tos} repository; production readiness remains subject
-to the stated release gates \\
-Identity and Operation &
-Agent and provider identity, ownership, capabilities, Intent, Agreement, versioned operations,
-authorization, replay protection, resource envelopes, metering, evidence and Receipts &
-Implemented reusable actors plus partial or planned open specifications, SDKs and conformance \\
-Propagation and Discovery &
-Direct communication, ADNL/DHT/RLDP, TOS DNS, TOS Sites, Messenger, Mailbox, ARD publication,
-gateways, signed descriptors, indexes and federated registries &
-Core network primitives implemented; common propagation, discovery and interoperability
-products are partial or planned \\
-Runtime and Provider &
-OpenFox, webTOS, third-party agent runtimes, model and tool services, storage, search,
-relays and owner-operated physical terminals &
-Independently released runtimes, adapters and operator infrastructure; providers retain local
-admission, pricing, data and safety authority \\
-Application and Society &
-FreeCity, communication, software work, commerce, booking, human services, communities and
-other intent-native applications and institutions &
-Application-specific state machines and interfaces built above the public infrastructure \\
+Agent Access, Coordination and Discovery &
+Accept goals from heterogeneous agent clients; authenticate principals; apply owner spending
+and capability policy; publish and discover services; match candidates; negotiate quotes;
+form Agreements; invoke work; coordinate asynchronous jobs and return results &
+May interpret, rank and route, but cannot create owner authority, silently expand an Agreement
+or make an index authoritative \\
+Autonomous Runtime and Provider Execution &
+Adapt models, tools, APIs, local programs, compute and physical devices; admit jobs; isolate
+workers; enforce time, memory, compute, network and data limits; meter resources; generate
+results, evidence and signed Receipts &
+Providers control admission, resources, data and safety; a runtime cannot self-authorize a
+caller or declare its own economic statement final \\
+Trust, Evidence and Economy &
+Anchor identity and capability commitments; manage reputation references, budgets, escrow,
+payments, Receipt verification, proofs, disputes, refunds and final settlement; account for
+eligible useful work under an explicitly activated incentive policy &
+Economic state follows accepted policy and verified evidence; a scorer, gateway, provider or
+analytics service cannot mint, move or finalize value by assertion \\
+Decentralized Network Foundation &
+Provide authenticated propagation, validator consensus, immutable actor state, contracts,
+events, Receipt commitments, state synchronization and finality &
+Consensus verifies deterministic state transitions and commitments; validators do not execute
+private model, tool, software or physical-service workloads \\
 \bottomrule
 \end{longtable}
 
-Existing Agent, Service, Escrow, Registry, Dispute and Attestation actors remain reusable TOS
-Core foundations. Product-specific daemons, message payloads, model runtimes, catalogs and
-continuous device telemetry do not belong in the validator repository. A Gateway, Carrier or
+Applications and institutions sit above and across these layers. Communication, software
+work, model calls, compute, storage, commerce, booking, human services and physical-edge work
+are service profiles of the same infrastructure, not separate definitions of TOS Network.
+
+\subsection{Four Cross-Layer Flows}
+
+The architecture is easier to reason about as four flows that meet at explicit boundaries:
+
+\begin{longtable}{L{0.20\textwidth}L{0.69\textwidth}}
+\toprule
+Flow & Meaning \\
+\midrule
+\endhead
+Request and discovery &
+An agent expresses Intent, resolves identity and capabilities, discovers candidates and
+receives quotes. Search results and recommendations remain non-authoritative. \\
+Job and execution &
+An accepted Agreement becomes one or more bounded invocations. The provider admits and
+executes work under local policy, isolates resources and returns the result. \\
+Settlement and value &
+Budget, escrow, usage and payment move according to the Agreement. The path may use native
+assets, stable value, prepaid credit, sponsored allowances, payment channels or batched
+settlement, provided the maximum external cost remains enforceable. \\
+Trust and state &
+Signatures, commitments, Receipts, proofs, disputes, events and final settlement connect
+off-chain action to shared state. Raw private payloads do not need to enter consensus. \\
+\bottomrule
+\end{longtable}
+
+The request and job flows are normally high-frequency and off-chain. The value and trust
+flows touch shared state only as required by the accepted risk, evidence and settlement
+policy. This keeps agent interaction fast without turning a gateway, runtime or index into a
+trusted intermediary.
+
+\subsection{End-to-End Intent-to-Settlement Path}
+
+\begin{enumerate}
+  \item A user, organization or autonomous agent expresses an Intent through any compatible
+        client or runtime.
+  \item The access layer authenticates the principal, resolves delegated authority and
+        discovers providers that claim the required capability.
+  \item Matching compares verifiable capability, price, latency, reputation, locality,
+        evidence and policy compatibility; candidates return bounded quotes.
+  \item Deterministic owner policy or explicit owner approval accepts precise terms and forms
+        an Agreement. Discovery or model output alone cannot authorize spending.
+  \item The coordination layer invokes the agreed operation and the provider runtime admits
+        it under current capacity, legal, security and safety policy.
+  \item An isolated worker executes within the agreed resource, time, tool, network and data
+        bounds while producing the required evidence and metering record.
+  \item The provider returns the result and a signed Receipt bound to the Agreement,
+        operation, usage, evidence policy and result commitment.
+  \item The verification and settlement path releases, nets, refunds or disputes value, and
+        records only the shared commitments and outcomes required by the protocol.
+  \item The verified result returns to the caller. Derived indexes and reputation views may
+        update from the finalized outcome, while critical clients continue to verify source
+        signatures and chain state.
+\end{enumerate}
+
+When AIPoW is active, it consumes only separately eligible, evidence-graded and settled work
+after this path. It does not authorize the original request, determine whether a service must
+be purchased, replace ordinary payment or allow an off-chain scorer to mint value.
+
+Existing Agent, Service, Escrow, Registry, Dispute and Attestation actors remain reusable
+trust foundations. Product-specific daemons, message payloads, model runtimes, catalogs and
+continuous device telemetry do not belong in validator execution. A Gateway, Carrier or
 Indexer may improve reachability and usability, but none is protocol authority for identity,
 capability, accepted Agreement, funds or final settlement.
 
