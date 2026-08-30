@@ -467,7 +467,7 @@ action such as:
 \begin{center}
 \opid{messenger.send@1}\quad
 \opid{mailbox.deposit@1}\quad
-\opid{model.infer@2}\quad
+\opid{model.infer@1}\quad
 \opid{storage.put@1}
 \end{center}
 
@@ -480,6 +480,89 @@ Multiple independent providers may implement the same operation revision. An age
 discover candidates, compare quotes and evidence policy, authorize one within a bounded
 budget, receive a standardized receipt and switch providers without learning a completely
 different economic protocol.
+
+\subsection{Opcode Registry and Maturity}
+\label{sec:opcode-registry}
+
+This edition names \textbf{25 distinct Agentic Service Opcode families}. These identifiers are
+an architectural vocabulary and a development registry; naming an opcode in this paper does
+not mean that its revision has been frozen as an interoperable TOS standard. Earlier drafts
+also used \opid{model.infer@2} as an illustrative revision. This edition normalizes the
+illustrative model-inference entry to \opid{model.infer@1}; a future incompatible semantic
+change would advance the immutable revision in the normal way.
+
+Opcode maturity is tracked independently from the implementation status of the underlying TOS
+Core contracts and networking primitives:
+
+\begin{longtable}{L{0.18\textwidth}L{0.71\textwidth}}
+\toprule
+Maturity & Meaning \\
+\midrule
+\endhead
+Design &
+The operation name and intended semantics are described, but the canonical wire contract and
+conformance vectors are not complete. \\
+Partial &
+One or more profile-specific implementations or reusable primitives exist, but the complete
+canonical operation contract is not frozen. \\
+Frozen &
+Canonical identifier, revision, schemas, authority rules, metering, errors, Receipt semantics
+and success/failure vectors are published and immutable for that revision. \\
+Implemented &
+A reference implementation passes the frozen conformance suite for that exact revision. \\
+Interoperable &
+At least two independently authored implementations exchange and verify equivalent requests,
+results and Receipts for the frozen revision. \\
+Production &
+The interoperable revision has additionally passed the applicable security, release,
+operational and public-network gates. \\
+\bottomrule
+\end{longtable}
+
+As of this edition, \textbf{zero Agentic Service Opcode revisions have reached the Frozen,
+Interoperable or Production maturity levels defined above}. Messenger and Mailbox have the
+strongest profile-specific implementation foundations, but their generic operation contracts
+remain Partial. The remaining opcode families are Design/Planned unless a released profile
+specification says otherwise. This prevents an implemented low-level behavior from being
+mistaken for a frozen Internet-wide semantic contract.
+
+\begin{longtable}{L{0.30\textwidth}L{0.16\textwidth}L{0.43\textwidth}}
+\toprule
+Opcode & Maturity & Current scope \\
+\midrule
+\endhead
+\opid{messenger.send@1} & Partial & Messaging-plane foundations exist; generic commercial and cross-provider contract not frozen. \\
+\opid{messenger.introduce@1} & Design & Introduction/attention-bond semantics remain profile specification work. \\
+\opid{messenger.acknowledge@1} & Partial & Acknowledgement foundations exist; portable Receipt semantics are not frozen. \\
+\opid{mailbox.deposit@1} & Partial & Capability-bound deposit and stored-acknowledgement foundations exist. \\
+\opid{mailbox.read@1} & Partial & Capability-bound read foundations exist; generic provider conformance is incomplete. \\
+\opid{mailbox.delete@1} & Partial & Capability-bound delete foundations exist; generic provider conformance is incomplete. \\
+\opid{mail.send@1} & Design & Mail-specific domain and anti-abuse profile remains planned. \\
+\opid{model.infer@1} & Design & Model-provider quote, metering, evidence and Receipt profile remains planned. \\
+\opid{embedding.create@1} & Design & Model/embedding profile remains planned. \\
+\opid{speech.transcribe@1} & Design & Speech profile remains planned. \\
+\opid{tool.invoke@1} & Design & Generic tool invocation profile remains planned. \\
+\opid{workflow.execute@1} & Design & Workflow composition profile remains planned. \\
+\opid{storage.put@1} & Design & Storage lease and durability profile remains planned. \\
+\opid{storage.get@1} & Design & Storage retrieval profile remains planned. \\
+\opid{storage.renew@1} & Design & Storage renewal profile remains planned. \\
+\opid{storage.delete@1} & Design & Storage deletion/expiry semantics remain planned. \\
+\opid{event.publish@1} & Design & Event fan-out, backlog and settlement profile remains planned. \\
+\opid{event.subscribe@1} & Design & Subscription, replay and backlog profile remains planned. \\
+\opid{commerce.quote@1} & Design & Commerce domain state machine remains planned. \\
+\opid{commerce.order@1} & Design & Commerce order/fulfillment profile remains planned. \\
+\opid{booking.reserve@1} & Design & Reservation, deposit and cancellation profile remains planned. \\
+\opid{booking.cancel@1} & Design & Booking cancellation/refund semantics remain planned. \\
+\opid{delivery.request@1} & Design & Delivery and fulfillment profile remains planned. \\
+\opid{human.task@1} & Design & Human-service evidence and dispute profile remains planned. \\
+\opid{task.post@1} & Design & Task-market operation wrapper remains planned above the implemented Task Escrow actor. \\
+\bottomrule
+\end{longtable}
+
+The registry is intentionally extensible. Third parties may define new operation namespaces,
+but a TOS publication must state its maturity explicitly. A Design or Partial identifier must
+not be advertised as a frozen TOS standard, and a Frozen identifier must not be advertised as
+Interoperable until an independent implementation demonstrates the same semantics.
 
 \subsection{Three Opcode Layers}
 
@@ -499,7 +582,7 @@ Contract message opcode &
 Receiving actor interprets the message body &
 Contract execution, attached value and message fees \\
 Agentic Service Opcode &
-\texttt{messenger.send@1}, \texttt{model.infer@2} &
+\texttt{messenger.send@1}, \texttt{model.infer@1} &
 External service, relay, terminal or another agent &
 Profile-specific usage, quote, allowance, bond and settlement \\
 \bottomrule
@@ -698,7 +781,8 @@ Escrow, claimant bond, result receipt and dispute policy \\
 
 These identifiers are illustrative until frozen by their respective specifications. Their
 purpose is to show that communication, compute, storage and commerce can share one economic
-operation model without sharing one workload implementation.
+operation model without sharing one workload implementation. The authoritative maturity
+summary for the identifiers named in this edition is Section~\ref{sec:opcode-registry}.
 
 \section{Design Principles}
 
@@ -1208,10 +1292,12 @@ resolution is bounded by contract balance and role checks.
 
 \subsection{Protocol Scope}
 
-The Agentic Operation Protocol is the common execution protocol within the Identity and
-Operation Plane above TOS Core. Its purpose is not to define every business workflow. It
-defines the portable contract through which an accepted Agreement authorizes one or more
-operations so independent agents and providers can interoperate safely.
+The Agentic Operation Protocol is the common execution contract spanning the Agent Access,
+Coordination and Discovery layer, the Autonomous Runtime and Provider Execution layer and the
+Trust, Evidence and Economy layer above the Decentralized Network Foundation. Its purpose is
+not to define every business workflow. It defines the portable contract through which an
+accepted Agreement authorizes one or more operations so independent agents and providers can
+interoperate safely.
 
 Independent implementations require canonical and versioned definitions for:
 
@@ -1545,8 +1631,9 @@ Agreement-specific evidence and verifier policies assess only declared claims; p
 principals retain local admission and trust policy \\
 Network organization &
 Multiple independent commodity subnets connected through Bittensor's chain and TAO system &
-Five interoperable planes spanning trust, identity, propagation, runtimes and applications,
-with plural providers, indexes, gateways and transports \\
+Four interoperable infrastructure layers spanning access and coordination, provider execution,
+trust and economy, and the decentralized network foundation, with plural providers, indexes,
+gateways and transports \\
 Blockchain role &
 Registers and coordinates the network and pays participants in TAO in proportion to the value
 recognized by its mechanisms &
@@ -2953,6 +3040,13 @@ service availability or adoption. ``Partial'' means useful primitives or a profi
 implementation exist but the generic interoperable product surface does not. ``Planned''
 identifies specification or product work that remains.
 
+For Agentic Service Opcodes specifically, this edition names 25 distinct operation families.
+The maturity model in Section~\ref{sec:opcode-registry} is stricter than the implementation
+status of reusable contracts: \textbf{no named Agentic Service Opcode revision is currently
+Frozen, Interoperable or Production}. Messenger and Mailbox contain Partial profile-specific
+foundations; the rest of the named operation families remain Design/Planned unless a released
+profile specification establishes a higher maturity.
+
 \begin{longtable}{L{0.34\textwidth}L{0.17\textwidth}L{0.38\textwidth}}
 \toprule
 Capability & Status & Scope \\
@@ -3292,6 +3386,13 @@ inside the deterministic blockchain VM. Contract message opcodes identify actor-
 transitions. Agentic Service Opcodes identify economically accountable external actions.
 Their shared name reflects a portable instruction vocabulary, not a requirement that every
 action run in one virtual machine or that the operation layer define the whole network.
+
+The current opcode registry names 25 distinct Agentic Service Opcode families, but none has
+yet reached the Frozen, Interoperable or Production maturity levels defined by this paper.
+Messenger and Mailbox provide Partial implementation foundations; the remaining families are
+design targets. This distinction is intentional: a portable Internet primitive becomes a TOS
+standard only after its exact revision, schemas, authority, metering, Receipt semantics and
+conformance behavior are frozen and independently reproduced.
 
 Metering does not mean every trusted message or local action must incur a non-zero charge. It
 means no caller can impose unlimited storage, compute, delivery, attention or retry costs
