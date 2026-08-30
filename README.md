@@ -59,6 +59,22 @@ Metering does not require a non-zero fee. Allowances, subscriptions, sponsorship
 
 Private payloads and execution can remain off-chain. TOS is used where shared identity, authority, commitments, receipts, disputes, or final settlement require a tamper-resistant source of truth.
 
+### Opcode maturity
+
+The whitepaper currently names **25 distinct Agentic Service Opcode families** across communication, model/tool execution, storage/events, commerce/booking, delivery, human work and task coordination. These names are an architectural vocabulary, not a claim that 25 portable protocol revisions are already released.
+
+The current maturity snapshot is:
+
+- **6 PARTIAL** — profile-specific code foundations exist, principally Messenger/Mailbox operations, but their complete generic operation contracts are not frozen.
+- **19 DESIGN** — the operation is described architecturally, while its normative profile remains to be frozen.
+- **0 FROZEN** — no Agentic Service Opcode revision yet satisfies the complete freeze gate for identifier, schemas, authority, metering, Receipt semantics, errors and canonical conformance vectors.
+- **0 IMPLEMENTED against a frozen generic conformance suite**.
+- **0 INTEROPERABLE / PRODUCTION** under the strict opcode maturity model.
+
+This distinction is intentional: implemented Task Escrow, Service Actor, Messenger or Mailbox primitives do not automatically make an illustrative `operation_id` a frozen cross-provider standard.
+
+See [Agentic Service Opcode Registry](AGENTIC_OPCODE_REGISTRY.md) for the complete 25-opcode status matrix and the `DESIGN -> PARTIAL -> FROZEN -> IMPLEMENTED -> INTEROPERABLE -> PRODUCTION` maturity gates.
+
 ## Investor materials
 
 - [Investor comparison](INVESTOR_COMPARISON.md)
@@ -67,6 +83,7 @@ Private payloads and execution can remain off-chain. TOS is used where shared id
 
 - `tos.tex` - LaTeX source for the whitepaper
 - `tos.pdf` - compiled PDF edition
+- `AGENTIC_OPCODE_REGISTRY.md` - Agentic Service Opcode inventory, maturity status, and freeze gates
 - `LICENSE.md` - GNU General Public License v3.0
 
 ## Build the PDF
@@ -85,6 +102,8 @@ This whitepaper separates released foundations from architectural direction:
 - **Implemented**: a released node, contract, tool, or test foundation exists.
 - **Partial**: useful primitives or a profile-specific implementation exists, while the common interoperable surface remains incomplete.
 - **Planned**: specification, implementation, conformance testing, and independent review remain required.
+
+These broad document labels are distinct from the stricter opcode maturity ladder in `AGENTIC_OPCODE_REGISTRY.md`. In particular, a profile can contain implemented foundations while its public `operation_id` remains `PARTIAL` until the normative operation contract is frozen.
 
 These labels do not imply production readiness, external audit, commercial availability, adoption, or legal approval. Protocol behavior is defined by released code, schemas, and accepted network rules, not by prose alone.
 
