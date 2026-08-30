@@ -2,7 +2,7 @@
 
 This registry makes the implementation status of the Agentic Service Opcodes named in the TOS Network whitepaper explicit.
 
-An **Agentic Service Opcode** is a service-layer architectural operation identified normatively by `operation_id`. It is not a TVM instruction. The whitepaper currently names **25 distinct opcode families**. These names describe the intended Agentic Internet operation vocabulary; they do not imply that every identifier is already a frozen protocol standard.
+An **Agentic Service Opcode** is a service-layer architectural operation identified normatively by `operation_id`. It is not a TVM instruction. The current whitepaper names **25 distinct opcode families**. These names describe the intended Agentic Internet operation vocabulary; they do not imply that every identifier is already a frozen protocol standard.
 
 ## Status model
 
@@ -22,7 +22,7 @@ A later stage implies the earlier stages. `PARTIAL` therefore does **not** mean 
 | Opcode | Domain | Status | Current basis |
 | --- | --- | --- | --- |
 | `messenger.send@1` | Communication | **PARTIAL** | Messaging-plane foundations exist; generic operation contract and cross-provider conformance are not frozen. |
-| `messenger.introduce@1` | Communication / anti-spam | **DESIGN** | Refundable attention-bond policy is specified architecturally; production bond profile remains planned. |
+| `messenger.introduce@1` | Communication / anti-spam | **DESIGN** | Refundable attention-bond policy is specified architecturally; no profile-specific implementation has established the generic operation contract. |
 | `messenger.acknowledge@1` | Communication | **PARTIAL** | Stored acknowledgement foundations exist; portable acknowledgement Receipt semantics are not frozen. |
 | `mailbox.deposit@1` | Communication / storage | **PARTIAL** | Capability-bound deposit, nonce/expiry checks and stored acknowledgement foundations exist. |
 | `mailbox.read@1` | Communication / storage | **PARTIAL** | Capability-bound read foundations exist; generic pricing and conformance remain incomplete. |
@@ -49,14 +49,14 @@ A later stage implies the earlier stages. `PARTIAL` therefore does **not** mean 
 
 ## Current counts
 
-- **25** distinct opcode names are explicitly represented in the whitepaper.
-- **6** are classified here as `PARTIAL` because profile-specific code foundations exist.
-- **19** remain at `DESIGN`.
+- **25** distinct opcode families are explicitly represented in the current whitepaper.
+- **5** are classified here as `PARTIAL` because profile-specific code foundations exist.
+- **20** remain at `DESIGN`.
 - **0** are currently classified as `FROZEN`.
 - **0** are currently classified as `IMPLEMENTED` against a frozen generic Agentic Operation conformance suite.
 - **0** are currently classified as `INTEROPERABLE` or `PRODUCTION` under this maturity model.
 
-The whitepaper also uses `model.infer@2` as an example of immutable revisioning. That example does not add a second opcode family to the count above. A revision becomes a registry entry only when its normative definition is intentionally frozen.
+Earlier drafts used `model.infer@2` as an illustrative example of immutable revisioning. The current edition normalizes the illustrative model-inference identifier to `model.infer@1`; a later incompatible revision should be introduced only through the ordinary freeze and compatibility process.
 
 ## Freeze gate for an opcode revision
 
