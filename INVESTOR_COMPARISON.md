@@ -14,6 +14,20 @@ The shortest distinction is:
 > coordinate accountable economic activity among autonomous agents, service providers and
 > users.**
 
+An equivalent one-line framing: **Bittensor organizes the production of machine
+intelligence; TOS Network organizes the transaction of it.**
+
+## At a glance
+
+| Question | Bittensor | TOS Network |
+| --- | --- | --- |
+| **Basic coordination unit** | A **Subnet**: the owner defines what miners produce and how validators score it. | An **Agreement**: an exact, authenticated commitment between agents binding operation revision, budget, deadline, evidence level and recourse. |
+| **Where the money comes from** | Emission-driven: miner income comes primarily from TAO/Alpha protocol emissions; external paid demand varies by subnet. | Demand first: service revenue flows through escrow and settlement independent of issuance. AIPoW is optional, feature-gated, scores only separately settled work, and is not active. |
+| **Who judges the value of work** | Each subnet's validators score miners subjectively; weights enter Yuma consensus and directly determine rewards. | Off-chain scorers deterministically recompute scores from finalized Receipts (byte-for-byte reproducible), behind a bonded commitment and public challenge window; consensus verifies arithmetic and does not judge intelligence. |
+| **Role of the blockchain** | Manages registration, staking, weights and emissions; no general contract execution. | A full L1: actor-model TVM, native agent contracts (accounts, escrow, dispute, registry, attestation), workchain sharding; identity and delegated authority are first-class. |
+| **Service scope** | Each subnet defines one digital commodity (inference, compute, prediction, ...). | Horizontal: models, software work, communication, storage, commerce, human services and physical-edge work share one accountable lifecycle. |
+| **Maturity and key risk** | An operating network; risk lies in subnet incentive quality and demand beyond emissions. | An infrastructure build-out (chain and trust actors implemented; the generic operation surface partial or planned); risk lies in adoption and organic paid demand. |
+
 | Dimension | TOS Network | Bittensor | Why it matters to investors |
 | --- | --- | --- | --- |
 | **Primary problem** | Build the open transaction and coordination infrastructure for the Agentic Internet. | Build an open network in which independent subnets produce digital commodities and contributors earn protocol rewards. | The projects target different layers of the AI value chain rather than offering the same product. |
@@ -122,3 +136,37 @@ For investors, the analogy highlights the same central diligence question found 
 Bittensor subnet: **who defines useful work, and can the scoring rule resist manipulation?**
 TOS adds a further requirement: the work should arise from independently settled demand and
 portable evidence before it can become eligible for optional protocol issuance.
+
+## Workchains are not subnets
+
+A natural question is whether TOS workchains — the protocol's ability to run many parallel
+chains under one masterchain — are the TOS equivalent of Bittensor subnets. They are not.
+The two concepts sit on different axes.
+
+A **TOS workchain** is an infrastructure partition. Each workchain can carry its own
+execution parameters, splits dynamically into shardchains for parallel block production, is
+secured by the same global validator set and anchors finality through the masterchain, with
+native asynchronous cross-workchain messaging. Workchains answer a scaling and heterogeneity
+question — *where and how execution happens* — and carry no economic semantics of their own:
+they do not define what work is valuable, who may earn, or how rewards are computed.
+
+A **Bittensor subnet** is an incentive market. It answers an economic question — *what
+counts as useful work and how rewards are allocated* — while running on a single,
+non-sharded coordination chain.
+
+The mapping therefore crosses layers rather than aligning them:
+
+| Concept | Axis | Counterpart on the other network |
+| --- | --- | --- |
+| TOS workchain / shardchain | Execution and settlement partitioning | No Bittensor equivalent; subtensor is a single chain without execution sharding. |
+| Bittensor subnet | Work-category incentive market | Not a workchain. The TOS analogue is an eligible Agentic Service Operation profile plus its published, frozen AIPoW scoring methodology (see the table above). |
+| Per-subnet Alpha token | Market-level economics | No TOS equivalent; TOS deliberately uses a single native asset with no per-profile tokens. |
+| Per-subnet emission allocation | Reward routing | No TOS equivalent; validator rewards are global protocol policy, and AIPoW eligibility is defined at the governance and methodology level, not per workchain. |
+
+A vertical with sustained volume could one day be deployed into a dedicated workchain for
+throughput isolation, which would superficially resemble a subnet hosting one service
+economy. Even then, the workchain would only provide execution capacity: scoring rules,
+issuance eligibility and validator rewards would remain protocol-level and global. In short,
+each network has the dimension the other lacks — TOS has execution sharding without
+per-market token economics; Bittensor has per-market token economics without execution
+sharding.
