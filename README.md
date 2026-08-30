@@ -61,12 +61,12 @@ Private payloads and execution can remain off-chain. TOS is used where shared id
 
 ### Opcode maturity
 
-The whitepaper currently names **25 distinct Agentic Service Opcode families** across communication, model/tool execution, storage/events, commerce/booking, delivery, human work and task coordination. These names are an architectural vocabulary, not a claim that 25 portable protocol revisions are already released.
+The current whitepaper names **25 distinct Agentic Service Opcode families** across communication, model/tool execution, storage/events, commerce/booking, delivery, human work and task coordination. These names are an architectural vocabulary, not a claim that 25 portable protocol revisions are already released.
 
 The current maturity snapshot is:
 
-- **6 PARTIAL** — profile-specific code foundations exist, principally Messenger/Mailbox operations, but their complete generic operation contracts are not frozen.
-- **19 DESIGN** — the operation is described architecturally, while its normative profile remains to be frozen.
+- **5 PARTIAL** — profile-specific code foundations exist, principally Messenger/Mailbox operations, but their complete generic operation contracts are not frozen.
+- **20 DESIGN** — the operation is described architecturally, while its normative profile remains to be frozen.
 - **0 FROZEN** — no Agentic Service Opcode revision yet satisfies the complete freeze gate for identifier, schemas, authority, metering, Receipt semantics, errors and canonical conformance vectors.
 - **0 IMPLEMENTED against a frozen generic conformance suite**.
 - **0 INTEROPERABLE / PRODUCTION** under the strict opcode maturity model.
