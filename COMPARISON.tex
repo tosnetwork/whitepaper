@@ -1,0 +1,300 @@
+% Copyright (C) 2025-2026 TOS Network.
+% Licensed under the GNU General Public License v3.0.
+\documentclass[UTF8,11pt,fontset=fandol]{ctexart}
+
+\usepackage[a4paper,margin=1.8cm,headheight=15pt]{geometry}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+\usepackage{longtable}
+\usepackage{microtype}
+\usepackage{pdflscape}
+\usepackage[table]{xcolor}
+
+\definecolor{tosblue}{HTML}{173B67}
+\definecolor{toslight}{HTML}{EAF1F8}
+\definecolor{tosgray}{HTML}{F3F5F7}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=tosblue,
+  urlcolor=tosblue,
+  pdftitle={TOS Network 与 Bittensor 投资者对比},
+  pdfauthor={TOS Network},
+  pdfsubject={Agentic Internet 基础设施与数字商品激励网络的分层比较}
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small TOS Network 与 Bittensor 投资者对比}
+\fancyhead[R]{\small 2026}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\setlength{\parindent}{2em}
+\setlength{\parskip}{0.35em}
+\setlength{\LTpre}{0.5em}
+\setlength{\LTpost}{0.7em}
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.25}
+\setlist[itemize]{leftmargin=2em,itemsep=0.25em,topsep=0.35em}
+\newcolumntype{P}[1]{>{\raggedright\arraybackslash}p{#1}}
+
+\title{\bfseries TOS Network 与 Bittensor\\[0.35em]
+\Large 投资者对比}
+\author{TOS Network}
+\date{2026年8月31日}
+
+\begin{document}
+
+\maketitle
+
+\begin{center}
+\colorbox{toslight}{\parbox{0.9\textwidth}{
+\centering
+\textbf{一句话结论}\par
+\vspace{0.35em}
+Bittensor 组织机器智能与其他数字商品的\textbf{生产、评价和激励}；
+TOS Network 组织自主 Agent、服务提供者与用户之间可问责的\textbf{交易、授权与结算}。
+}}
+\end{center}
+
+\vspace{0.8em}
+
+TOS Network 与 Bittensor 面向 AI 经济中相邻但不同的层级。Bittensor 通过 Subnet
+组织竞争性市场，由矿工生产数字商品、Validator 评价产出并通过协议激励进行协调。
+TOS Network 则构建跨 Agent 基础设施，使不同主体控制的 Agent 能够完成身份确认、
+授权、发现、协商、Agreement、受限执行、Evidence/Receipt、付款与最终结算。
+
+另一种简洁表述是：\textbf{Bittensor 组织机器智能的生产，TOS Network 组织机器智能
+及其他服务的交易。}
+
+\tableofcontents
+\newpage
+
+\section{快速对比}
+
+\begin{longtable}{P{0.17\textwidth}P{0.36\textwidth}P{0.37\textwidth}}
+\toprule
+\rowcolor{toslight}
+问题 & Bittensor & TOS Network \\
+\midrule
+\endhead
+\textbf{基本协调单元} &
+\textbf{Subnet}。Subnet Owner 定义矿工生产什么，以及 Validator 如何评分。 &
+\textbf{Agreement}。Agent 之间经过认证的精确承诺，绑定操作版本、预算、截止时间、
+证据等级与追索机制。 \\
+\textbf{资金来源} &
+以协议发行驱动：矿工收入主要来自 TAO/Alpha 协议发行；外部付费需求因 Subnet 而异。 &
+需求优先：服务提供者通过 escrow 和 settlement 获得服务收入。新增 TOS 仅来自固定
+5 亿枚总量上限内的 Validator 区块奖励，与服务活动相互独立。 \\
+\textbf{谁判断工作价值} &
+各 Subnet 的 Validator 按其激励机制评价矿工，提交的权重进入 Yuma Consensus 并影响奖励。 &
+每个 Agreement 定义自己的证据和验收政策。Verifier 评估该笔交易要求的声明，但服务评分
+不能控制 TOS 的原生发行。 \\
+\textbf{区块链的作用} &
+管理注册、质押、权重与发行，不提供通用合约执行。 &
+完整 L1：Actor 模型 TVM、原生 Agent 合约（账户、escrow、dispute、registry、attestation）、
+Workchain 分片；身份与委托授权是一等能力。 \\
+\textbf{服务范围} &
+每个 Subnet 定义一种数字商品，例如推理、计算或预测。 &
+横向基础设施：模型、软件工作、通信、存储、商业、人类服务和物理边缘工作共享同一套
+可问责生命周期。 \\
+\textbf{成熟度与关键风险} &
+已运行的网络；主要风险在于 Subnet 激励质量，以及超越协议发行的真实需求。 &
+仍在建设的基础设施；区块链与信任 Actor 已形成实现基础，通用操作层部分完成或仍在设计。
+主要风险是采用率和有机付费需求。 \\
+\bottomrule
+\end{longtable}
+
+\section{详细投资维度}
+
+\begin{landscape}
+\footnotesize
+\begin{longtable}{P{0.13\linewidth}P{0.25\linewidth}P{0.25\linewidth}P{0.25\linewidth}}
+\toprule
+\rowcolor{toslight}
+维度 & TOS Network & Bittensor & 对投资者的意义 \\
+\midrule
+\endfirsthead
+\toprule
+\rowcolor{toslight}
+维度 & TOS Network & Bittensor & 对投资者的意义 \\
+\midrule
+\endhead
+\textbf{主要问题} &
+为 Agentic Internet 构建开放的交易与协调基础设施。 &
+构建开放网络，使独立 Subnet 生产数字商品，并让贡献者获得协议奖励。 &
+两者面向 AI 价值链的不同层级，并非提供同一种产品。 \\
+\rowcolor{tosgray}
+\textbf{核心协调单元} &
+符合政策的 Agreement，由一个或多个受限、类型化的服务操作履行。 &
+Subnet Owner 定义矿工生产什么以及 Validator 如何评分。 &
+TOS 从已接受的商业承诺出发；Bittensor 从某类商品的市场与激励机制出发。 \\
+\textbf{主要参与者} &
+用户、个人与企业 Agent、服务提供者、Runtime、Gateway、Verifier、Settlement Actor
+和网络运营者。 &
+Subnet Owner、矿工、Validator、Staker 和链运营者。 &
+TOS 同时围绕需求侧 Agent 与供给侧设计；Bittensor 核心协议组织 Subnet 内的生产、评价与奖励。 \\
+\rowcolor{tosgray}
+\textbf{需求与发现} &
+Agent 表达 Intent、发现能力、比较报价，并在 Owner Policy 下形成经过认证的 Agreement。 &
+用户入口和商业分发取决于各 Subnet 或应用；基础网络暴露 Subnet 参与者和端点。 &
+TOS 尝试为多种服务提供从需求发现到购买的共同路径。 \\
+\textbf{身份与授权} &
+持久身份、委托 Capability、支出限制、防重放以及 Owner 或确定性 Policy 的明确授权
+都是一等基础设施。 &
+Wallet Key、Hotkey、Coldkey、Subnet 注册与 Validator/矿工身份管理网络参与。 &
+TOS 关注 Agent 可以代表 Owner 做什么；Bittensor 关注谁可以在 Subnet 内参与并获得奖励。 \\
+\rowcolor{tosgray}
+\textbf{协商与商业条款} &
+执行前由 Quote 和 Agreement 绑定范围、版本、预算、资源限制、截止时间、Evidence 与 Recourse。 &
+定价、服务条款和终端用户合同通常由单个 Subnet 或产品定义，而非统一的跨 Subnet 商业协议。 &
+TOS 面向独立运营的 Agent 与 Provider 之间可移植的商业承诺。 \\
+\textbf{执行位置} &
+工作在独立运营的 Agent、Provider 和 Worker Runtime 中离链执行，并受本地准入、隔离与安全政策约束。 &
+数字商品生产和 Subnet 评分逻辑主要在链下运行；链管理参与、权重和经济状态。 &
+两者都不把模型和服务工作负载放入 Validator 共识，但 TOS 对工作之外的执行边界进行了更广泛的标准化。 \\
+\rowcolor{tosgray}
+\textbf{结果评价} &
+Evidence 和签名 Receipt 绑定到 Agreement。验证强度取决于被接受的 Evidence Policy；
+Receipt 不会自动证明所有现实世界声明。 &
+Validator 根据各 Subnet 的激励机制评价矿工，提交的权重影响奖励。 &
+TOS 强调特定交易的可移植证据；Bittensor 强调数字商品市场中的持续相对评分。 \\
+\textbf{付款与结算} &
+支持受限预算、Escrow、直接付款、预付余额、Allowance、退款、Dispute 和最终 Settlement。
+Metering 不要求费用必须大于零。 &
+链按照 Subnet 与网络机制分配 TAO 和各 Subnet 的 Alpha 经济权益；终端用户商业付款由应用定义。 &
+TOS 连接服务收入与可执行结算；Bittensor 的原生经济引擎主要分配协议激励。 \\
+\rowcolor{tosgray}
+\textbf{激励的作用} &
+普通付费需求向服务提供者付款。新增 TOS 仅补偿当选 Validator 的共识参与，并受固定
+5 亿枚最大供应量约束。 &
+协议发行是奖励 Subnet Owner、矿工、Validator 和 Staker 的核心机制。 &
+TOS 将服务收入与 Validator 安全奖励分开；Bittensor 用发行启动并协调数字商品的生产与评价。 \\
+\textbf{区块链的作用} &
+当独立参与方需要共同状态时，提供共享身份承诺、Authority、Escrow、Receipt Commitment、
+Dispute、Payment 与 Finality。 &
+为 Bittensor 网络提供 Subnet 注册、Staking、Weight、Token Economics、Emission 与 Consensus。 &
+TOS 将链作为跨 Agent 活动的信任与结算层；Bittensor 将链作为 Subnet 市场的经济协调层。 \\
+\rowcolor{tosgray}
+\textbf{隐私边界} &
+私有 Prompt、Message、File、Model Output 和运行日志可保留在链下；只有必要的 Commitment
+和 Outcome 进入共享状态。 &
+Subnet 流量与隐私保证取决于具体机制；官方 Mining Guide 明确提醒标准 Validator-Miner
+流量并非私有数据通道。 &
+TOS 将私有执行与选择性 Evidence Disclosure 视为企业和个人 Agent 的架构要求。 \\
+\textbf{服务范围} &
+通信、软件工作、模型、工具、API、计算、存储、商业、人类服务和物理边缘工作可共享同一
+可问责生命周期。 &
+每个 Subnet 可定义一种数字商品，例如推理、计算、存储或预测，并定义自己的评价机制。 &
+TOS 是跨服务类别的横向基础设施；Bittensor 是容纳多个垂直数字商品网络的框架。 \\
+\rowcolor{tosgray}
+\textbf{当前成熟度} &
+区块链与可复用 Trust Actor 构成已实现基础；通用跨 Agent 操作层、多个 Profile、SDK 与
+Conformance Layer 仍为 Partial 或 Planned。 &
+已运行的网络，具备 Subnet、矿工、Validator、Staking、SDK 与 CLI；实现和产品成熟度因
+Subnet 而异。 &
+TOS 承担基础设施建设常见的执行与采用风险；Bittensor 已有实时网络证据，但每个 Subnet
+仍需单独进行技术和市场尽调。 \\
+\textbf{主要投资逻辑} &
+如果自主 Agent 需要跨平台的可移植身份、授权、发现、Agreement、Evidence 与 Settlement，
+中立经济与信任层将产生价值。 &
+开放竞争与 Token Incentive 可能比封闭平台更高效地生产有价值的机器智能与数字商品。 &
+TOS 是对跨 Agent 交易基础设施的投资判断；Bittensor 是对去中心化数字商品生产与激励市场的投资判断。 \\
+\rowcolor{tosgray}
+\textbf{关键风险} &
+互操作性、开发者采用、有机付费需求、Provider 供给、安全性、Validator 去中心化，以及固定上限下的奖励纪律。 &
+Subnet 激励质量、Validator 行为、数字商品需求、Token 市场动态，以及各 Subnet 商业模式的巨大差异。 &
+投资者应评价采用率、收入质量和验证完整性，而不能只看 Token 活动。 \\
+\bottomrule
+\end{longtable}
+\end{landscape}
+
+\section{两个系统如何协作}
+
+两者具有潜在互补关系。Bittensor Subnet 生产的服务可以发布为 TOS Capability。Agent
+随后可以发现该能力、获取报价、形成 Agreement、授权一次受限调用、接收 Evidence 与 Receipt，
+并通过选定的 TOS 支付路径进行结算。在这种组合中：
+
+\begin{itemize}
+  \item Bittensor 组织数字商品的生产、评价与激励；
+  \item TOS 组织购买方 Agent 与服务提供者之间的身份、Authority、商业 Agreement、调用、
+        Evidence 与 Settlement。
+\end{itemize}
+
+任何一方都不会自动提供另一方的信任保证。TOS Client 仍必须验证 Provider、Agreement、
+Evidence 与 Settlement State；Bittensor Subnet 仍必须定义并防御可信的激励和评价机制。
+
+\section{投资者应关注的指标}
+
+两者不应使用同一套采用指标进行估值：
+
+\begin{itemize}
+  \item 对 \textbf{TOS Network}：关注活跃交易 Agent、独立 Provider、付费操作、重复购买者、
+        Settled Value、Receipt 验证率、Dispute 比率和实现多样性；
+  \item 对 \textbf{Bittensor}：关注有用的 Subnet 产出、外部需求、Validator 质量、矿工竞争、
+        Subnet Economics，以及超越协议发行的需求持续性。
+\end{itemize}
+
+两者最强的共同信号都是\textbf{具有外部价值、可以验证的真实使用}。发行、Staking 和交易数量
+只能作为辅助指标，不能替代客户与有用工作。
+
+\section{Workchain 不是 Subnet}
+
+TOS Workchain 是基础设施分区。每个 Workchain 可以拥有自己的执行参数，动态拆分为
+Shardchain 以并行生产区块，由同一全局 Validator Set 保护，并通过 Masterchain 锚定 Finality，
+同时使用原生异步 Cross-Workchain Message。Workchain 回答的是\textbf{执行在哪里、如何扩展}
+的问题，本身不携带经济语义：它不定义什么工作有价值、谁可以获得奖励，也不定义奖励算法。
+
+Bittensor Subnet 是激励市场。它回答的是\textbf{什么算有用工作、奖励如何分配}的问题，
+并运行在单一、非分片的协调链上。
+
+\begin{longtable}{P{0.24\textwidth}P{0.24\textwidth}P{0.42\textwidth}}
+\toprule
+\rowcolor{toslight}
+概念 & 所在轴线 & 另一网络中的对应关系 \\
+\midrule
+\endhead
+TOS Workchain / Shardchain &
+执行与结算分区 &
+Bittensor 没有直接对应物；Subtensor 是不提供执行分片的单一链。 \\
+Bittensor Subnet &
+工作类别激励市场 &
+TOS 没有直接对应物。最接近的服务层单元是 Agentic Service Operation Profile，但它不包含
+协议发行市场。 \\
+Subnet Alpha Token &
+市场级经济权益 &
+TOS 没有对应物；TOS 仅使用一个原生资产，不为各 Profile 发行独立 Token。 \\
+Subnet 发行分配 &
+奖励路由 &
+TOS 没有对应物；TOS Validator 奖励属于全局共识安全政策，受固定 5 亿枚供应上限约束，
+不按 Workchain 或服务类别发行。 \\
+\bottomrule
+\end{longtable}
+
+一个具有持续流量的垂直领域未来可以部署到专用 Workchain 以隔离吞吐量，表面上可能类似
+承载单一服务经济的 Subnet。即使如此，Workchain 仍只提供执行容量：服务定义与商业条款属于
+Operation Layer，Validator 奖励则保持协议级、全局且受供应上限约束。简言之，两者各自拥有
+另一方没有的维度：TOS 具有执行分片但没有按市场划分的 Token Economics；Bittensor 具有
+按市场划分的 Token Economics，但没有执行分片。
+
+\section{范围、来源与免责声明}
+
+本文是功能与架构比较，不构成投资建议，也不主张两个系统在功能上等价。TOS 状态描述以当前
+\href{tos.pdf}{《TOS Network 白皮书》}为准。Bittensor 描述依据其官方
+\href{https://www.bittensor.com/docs}{网络文档}、
+\href{https://www.bittensor.com/docs/guides/subnets}{Subnet Guide} 和
+\href{https://www.bittensor.com/docs/guides/mining}{Mining Guide}；原英文比较于
+2026年8月30日完成资料复核。Bittensor 术语与经济机制可能发生变化，各 Subnet 之间也可能
+存在重大差异。
+
+\vfill
+\begin{center}
+\small
+\textbf{TOS Network：The Open System for the Agentic Internet}\par
+Connect Every AI Agent
+\end{center}
+
+\end{document}

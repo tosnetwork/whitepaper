@@ -73,17 +73,21 @@ The current maturity snapshot is:
 
 This distinction is intentional: implemented Task Escrow, Service Actor, Messenger or Mailbox primitives do not automatically make an illustrative `operation_id` a frozen cross-provider standard.
 
-See [Agentic Service Opcode Registry](AGENTIC_OPCODE_REGISTRY.md) for the complete 25-opcode status matrix and the `DESIGN -> PARTIAL -> FROZEN -> IMPLEMENTED -> INTEROPERABLE -> PRODUCTION` maturity gates.
+The complete 25-opcode status matrix and the `DESIGN -> PARTIAL -> FROZEN -> IMPLEMENTED -> INTEROPERABLE -> PRODUCTION` maturity gates are incorporated into the whitepaper.
 
 ## Investor materials
 
-- [Investor comparison](INVESTOR_COMPARISON.md)
+- [Investor comparison (English Markdown)](INVESTOR_COMPARISON.md)
+- [Investor comparison (Chinese PDF)](COMPARISON.pdf)
+- [Investor comparison (Chinese LaTeX source)](COMPARISON.tex)
 
 ## Repository contents
 
 - `tos.tex` - LaTeX source for the whitepaper
 - `tos.pdf` - compiled PDF edition
-- `AGENTIC_OPCODE_REGISTRY.md` - Agentic Service Opcode inventory, maturity status, and freeze gates
+- `INVESTOR_COMPARISON.md` - English investor comparison source
+- `COMPARISON.tex` - Chinese investor comparison LaTeX source
+- `COMPARISON.pdf` - compiled Chinese investor comparison
 - `LICENSE.md` - GNU General Public License v3.0
 
 ## Build the PDF
@@ -95,6 +99,13 @@ pdflatex -interaction=nonstopmode -halt-on-error tos.tex
 pdflatex -interaction=nonstopmode -halt-on-error tos.tex
 ```
 
+Build the Chinese investor comparison with XeLaTeX:
+
+```bash
+xelatex -interaction=nonstopmode -halt-on-error COMPARISON.tex
+xelatex -interaction=nonstopmode -halt-on-error COMPARISON.tex
+```
+
 ## Document status
 
 This whitepaper separates released foundations from architectural direction:
@@ -103,7 +114,7 @@ This whitepaper separates released foundations from architectural direction:
 - **Partial**: useful primitives or a profile-specific implementation exists, while the common interoperable surface remains incomplete.
 - **Planned**: specification, implementation, conformance testing, and independent review remain required.
 
-These broad document labels are distinct from the stricter opcode maturity ladder in `AGENTIC_OPCODE_REGISTRY.md`. In particular, a profile can contain implemented foundations while its public `operation_id` remains `PARTIAL` until the normative operation contract is frozen.
+These broad document labels are distinct from the stricter opcode maturity ladder defined in the whitepaper. In particular, a profile can contain implemented foundations while its public `operation_id` remains `PARTIAL` until the normative operation contract is frozen.
 
 These labels do not imply production readiness, external audit, commercial availability, adoption, or legal approval. Protocol behavior is defined by released code, schemas, and accepted network rules, not by prose alone.
 
