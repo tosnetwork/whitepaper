@@ -22,8 +22,8 @@ intelligence; TOS Network organizes the transaction of it.**
 | Question | Bittensor | TOS Network |
 | --- | --- | --- |
 | **Basic coordination unit** | A **Subnet**: the owner defines what miners produce and how validators score it. | An **Agreement**: an exact, authenticated commitment between agents binding operation revision, budget, deadline, evidence level and recourse. |
-| **Where the money comes from** | Emission-driven: miner income comes primarily from TAO/Alpha protocol emissions; external paid demand varies by subnet. | Demand first: service revenue flows through escrow and settlement independent of issuance. AIPoW is optional and feature-gated, and scores only separately settled work. |
-| **Who judges the value of work** | Each subnet's validators score miners subjectively; weights enter Yuma consensus and directly determine rewards. | Off-chain scorers deterministically recompute scores from finalized Receipts (byte-for-byte reproducible), behind a bonded commitment and public challenge window; consensus verifies arithmetic and does not judge intelligence. |
+| **Where the money comes from** | Emission-driven: miner income comes primarily from TAO/Alpha protocol emissions; external paid demand varies by subnet. | Demand first: service providers earn service revenue through escrow and settlement. New TOS supply comes only from validator block rewards within a fixed 500-million-TOS maximum and is independent of service activity. |
+| **Who judges the value of work** | Each subnet's validators score miners subjectively; weights enter Yuma consensus and directly determine rewards. | Each Agreement defines its evidence and acceptance policy. Verifiers assess the claims required for that transaction, but no service score controls native issuance. |
 | **Role of the blockchain** | Manages registration, staking, weights and emissions; no general contract execution. | A full L1: actor-model TVM, native agent contracts (accounts, escrow, dispute, registry, attestation), workchain sharding; identity and delegated authority are first-class. |
 | **Service scope** | Each subnet defines one digital commodity (inference, compute, prediction, ...). | Horizontal: models, software work, communication, storage, commerce, human services and physical-edge work share one accountable lifecycle. |
 | **Maturity and key risk** | An operating network; risk lies in subnet incentive quality and demand beyond emissions. | An infrastructure build-out (chain and trust actors implemented; the generic operation surface partial or planned); risk lies in adoption and organic paid demand. |
@@ -39,13 +39,13 @@ intelligence; TOS Network organizes the transaction of it.**
 | **Where execution happens** | Work runs off-chain in independently operated agent, provider and worker runtimes under local admission, isolation and safety policy. | Commodity production and subnet scoring logic run primarily off-chain; the chain manages participation, weights and economic state. | Both keep model and service workloads outside validator consensus, but TOS standardizes a broader execution envelope around the work. |
 | **How results are evaluated** | Evidence and signed Receipts are bound to the Agreement. Verification strength depends on the accepted evidence policy; a Receipt does not automatically prove every real-world claim. | Validators evaluate miners according to each subnet's incentive mechanism, and their submitted weights influence rewards. | TOS emphasizes portable evidence for a specific transaction; Bittensor emphasizes continuous relative scoring inside a commodity market. |
 | **Payments and settlement** | Supports bounded budgets, escrow, direct payment, prepaid credit, allowances, refunds, disputes and final settlement. Metering does not require a non-zero fee. | The chain distributes TAO and subnet-specific Alpha economics according to subnet and network mechanisms; commercial end-user payment is application-specific. | TOS aims to connect service revenue and enforceable settlement, while Bittensor's native economic engine primarily allocates protocol incentives. |
-| **Role of incentives** | Ordinary paid demand comes first. AIPoW is optional and feature-gated; if activated, it follows separately eligible, evidence-graded and settled work. | Protocol emissions are central to rewarding subnet owners, miners, validators and stakers. | TOS explicitly separates product revenue from optional issuance; Bittensor uses emissions to bootstrap and coordinate supply and evaluation. |
+| **Role of incentives** | Ordinary paid demand pays service providers. Native issuance compensates elected validators for consensus participation and is bounded by the fixed 500-million-TOS maximum. | Protocol emissions are central to rewarding subnet owners, miners, validators and stakers. | TOS separates service revenue from validator security rewards; Bittensor uses emissions to bootstrap and coordinate commodity production and evaluation. |
 | **Role of the blockchain** | Provides shared identity commitments, authority, escrow, Receipt commitments, disputes, payments and finality when independent parties need common state. | Provides subnet registration, staking, weights, token economics, emissions and consensus for the Bittensor network. | TOS uses the chain as a trust and settlement layer for cross-agent activity; Bittensor uses it as the economic coordination layer for subnet markets. |
 | **Privacy boundary** | Private prompts, messages, files, model outputs and operational logs can remain off-chain; only required commitments and outcomes enter shared state. | Subnet traffic and privacy guarantees are mechanism-specific; the official mining guide warns that standard validator-miner traffic is not a private-data channel. | TOS treats private execution and selective evidence disclosure as an architectural requirement for enterprise and personal agents. |
 | **Service scope** | Communication, software work, models, tools, APIs, compute, storage, commerce, human services and physical-edge work can share one accountable lifecycle. | Each subnet can define a digital commodity such as inference, compute, storage or prediction and its own evaluation mechanism. | TOS is horizontal infrastructure across service categories; Bittensor is a framework for many vertically defined commodity networks. |
 | **Current maturity** | The blockchain and reusable trust actors form an implemented foundation; the generic cross-agent operation surface, several profiles, SDKs and conformance layers remain partial or planned. | An operating network with subnets, miners, validators, staking, SDK and CLI; implementation and product maturity vary by subnet. | TOS carries execution and adoption risk typical of an infrastructure build-out. Bittensor has live-network evidence, while each subnet still requires separate technical and market diligence. |
 | **Primary investment thesis** | A neutral economic and trust layer becomes valuable if autonomous agents need portable identity, authorization, discovery, Agreements, evidence and settlement across platforms. | Open competition and token incentives can produce valuable machine intelligence and digital commodities more efficiently than closed platforms. | TOS is a bet on cross-agent transaction infrastructure; Bittensor is a bet on decentralized commodity production and incentive markets. |
-| **Key risk** | Interoperability, developer adoption, organic paid demand, provider supply, security and the discipline to keep incentives subordinate to real usage. | Subnet incentive quality, validator behavior, commodity demand, token-market dynamics and large variation among subnet business models. | Investors should evaluate adoption, revenue quality and verification integrity, not token activity alone. |
+| **Key risk** | Interoperability, developer adoption, organic paid demand, provider supply, security, validator decentralization and fixed-cap reward discipline. | Subnet incentive quality, validator behavior, commodity demand, token-market dynamics and large variation among subnet business models. | Investors should evaluate adoption, revenue quality and verification integrity, not token activity alone. |
 
 ## How the systems can work together
 
@@ -84,59 +84,6 @@ descriptions follow its official [network documentation](https://www.bittensor.c
 [mining guide](https://www.bittensor.com/docs/guides/mining), reviewed on August 30, 2026.
 Bittensor terminology and economics may change, and individual subnets can differ materially.
 
-## AIPoW and the Bittensor subnet analogy
-
-There is a useful analogy between TOS AIPoW and a Bittensor subnet, but it must be drawn at the
-right level. In Bittensor, a subnet owner defines the incentive mechanism: what miners should
-produce and how validators should score it. In TOS, the closest equivalent is not AIPoW as a
-whole. It is the combination of an **eligible Agentic Service Operation profile** and its
-**published, frozen scoring methodology**.
-
-That TOS methodology defines which settled work can qualify, which metering and evidence are
-required, how rate caps and quality factors apply, and which anti-collusion rules must pass
-before any score contributes to issuance.
-
-| Bittensor concept | Closest TOS AIPoW analogue | Important difference |
-| --- | --- | --- |
-| **Subnet** | An eligible work category and versioned Agentic Service Operation profile. | A TOS profile participates in the common cross-agent Agreement, Receipt and settlement lifecycle rather than defining a separate end-to-end economy. |
-| **Subnet owner-defined incentive mechanism** | A governance-approved, published and frozen scoring methodology, evidence policy and rate card. | No provider or scorer should be able to change the rules unilaterally during an epoch. |
-| **Miner** | An Agent or Provider that performs an eligible, independently settled operation. | A Provider can earn ordinary service revenue even when the operation receives zero AIPoW score. |
-| **Validator scoring miners** | Independent scorers, challengers and reviewers that recompute eligible work scores from finalized Receipts and evidence. | Production scorers should reproduce the same inputs, scores and Merkle root byte for byte; scorer-local judgment cannot directly mint TOS. |
-| **Validator weights and subnet reward calculation** | A bonded score commitment, public challenge window, approved review and deterministic epoch calculation. | TOS Core consensus verifies the finalized commitment and supply arithmetic; it does not decide whether an AI answer is intelligent. |
-| **Protocol emission to subnet participants** | Feature-gated, capped AIPoW issuance distributed after the challenge-complete score commitment. | AIPoW issuance is downstream of separately eligible, evidence-graded and settled demand and remains independent of the original service price. |
-| **Bittensor chain consensus** | TOS Core validator consensus. | Stake-bonded TOS validators secure chain state and finality. AIPoW provisions and rewards useful service capacity above consensus; AI work does not secure fork choice or block production. |
-
-The resulting TOS sequence is:
-
-```text
-Intent
--> Agreement
--> Paid or Authorized Execution
--> Evidence / Receipt
--> Settlement
--> AIPoW Eligibility
--> Deterministic Scoring
--> Commitment and Challenge
--> Consensus-Authorized Issuance
-```
-
-This ordering creates four important boundaries:
-
-1. **Demand precedes issuance.** AIPoW evaluates completed economic activity; it must not be
-   used to manufacture demand for the underlying service.
-2. **Payment and scoring are independent.** A valid paid operation may receive zero AIPoW
-   score, and an operation definition carries no automatic right to issuance.
-3. **Scorers evaluate but do not mint.** Off-chain scorers interpret published data and commit
-   reproducible results. Only a challenge-complete commitment and deterministic TOS Core
-   rules can authorize bounded issuance.
-4. **AIPoW is not blockchain consensus.** TOS Core consensus secures the ledger. AIPoW is an
-   optional service-capacity and community-distribution mechanism built above that ledger.
-
-For investors, the analogy highlights the same central diligence question found in a
-Bittensor subnet: **who defines useful work, and can the scoring rule resist manipulation?**
-TOS adds a further requirement: the work should arise from independently settled demand and
-portable evidence before it can become eligible for optional protocol issuance.
-
 ## Workchains are not subnets
 
 A natural question is whether TOS workchains — the protocol's ability to run many parallel
@@ -159,14 +106,15 @@ The mapping therefore crosses layers rather than aligning them:
 | Concept | Axis | Counterpart on the other network |
 | --- | --- | --- |
 | TOS workchain / shardchain | Execution and settlement partitioning | No Bittensor equivalent; subtensor is a single chain without execution sharding. |
-| Bittensor subnet | Work-category incentive market | Not a workchain. The TOS analogue is an eligible Agentic Service Operation profile plus its published, frozen AIPoW scoring methodology (see the table above). |
+| Bittensor subnet | Work-category incentive market | No direct TOS equivalent. The closest service-level unit is an Agentic Service Operation profile, but it carries no protocol-emission market. |
 | Per-subnet Alpha token | Market-level economics | No TOS equivalent; TOS deliberately uses a single native asset with no per-profile tokens. |
-| Per-subnet emission allocation | Reward routing | No TOS equivalent; validator rewards are global protocol policy, and AIPoW eligibility is defined at the governance and methodology level, not per workchain. |
+| Per-subnet emission allocation | Reward routing | No TOS equivalent; TOS validator rewards are global consensus-security policy within the fixed 500-million-TOS maximum, not per-workchain or per-service issuance. |
 
 A vertical with sustained volume could one day be deployed into a dedicated workchain for
 throughput isolation, which would superficially resemble a subnet hosting one service
-economy. Even then, the workchain would only provide execution capacity: scoring rules,
-issuance eligibility and validator rewards would remain protocol-level and global. In short,
+economy. Even then, the workchain would only provide execution capacity: service definitions
+and commercial terms would remain operation-level, while validator rewards would remain
+protocol-level, global and supply-capped. In short,
 each network has the dimension the other lacks — TOS has execution sharding without
 per-market token economics; Bittensor has per-market token economics without execution
 sharding.

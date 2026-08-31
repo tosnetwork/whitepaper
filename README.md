@@ -25,7 +25,7 @@ TOS Network is one system composed of four interoperable infrastructure layers, 
 
 1. **Agent Access, Coordination and Discovery** - identity-aware access, authentication, delegated authorization, capability publication and search, matching, quoting, spending policy, Agreement formation, job coordination, events, and result delivery.
 2. **Autonomous Runtime and Provider Execution** - agent, provider, and worker runtimes; model, tool, API, compute, and device adapters; isolated execution; local admission and safety policy; resource accounting; Evidence, Receipt, and result generation.
-3. **Trust, Evidence and Economy** - identity and capability commitments, reputation references, escrow, payment, Receipt verification, proof, dispute, refund, settlement, and optional demand-aligned contribution incentives.
+3. **Trust, Evidence and Economy** - identity and capability commitments, reputation references, escrow, payment, Receipt verification, proof, dispute, refund, settlement, fixed-supply accounting, and validator economics.
 4. **Decentralized Network Foundation** - validators, peer-to-peer propagation, consensus, the actor ledger, smart contracts, event logs, state synchronization, snapshots, and finality.
 
 Users, personal and enterprise agents, autonomous applications, machines, and service buyers enter through the access layer. Model, API, compute, storage, human, and physical-service providers connect through the runtime layer. Node operators, stakers, and governance participants maintain the decentralized foundation.
@@ -39,7 +39,7 @@ Settlement / Value:  runtime and coordination <-> trust and economy
 Trust / State:       trust and economy <-> decentralized foundation
 ```
 
-Private payloads and execution remain off-chain. Only the authority, commitments, evidence, disputes, and economic outcomes required by the accepted policy cross the shared trust boundary. A gateway may route, an index may rank, a runtime may execute, and a scorer may evaluate, but none can silently create owner authority or declare settlement final.
+Private payloads and execution remain off-chain. Only the authority, commitments, evidence, disputes, and economic outcomes required by the accepted policy cross the shared trust boundary. A gateway may route, an index may rank, and a runtime may execute, but none can silently create owner authority or declare settlement final.
 
 The common end-to-end path is:
 
@@ -49,7 +49,7 @@ Intent -> Authenticate -> Discover -> Match -> Quote -> Agreement
        -> Verify -> Settle or Dispute -> Return Result
 ```
 
-When AIPoW is active, it consumes only separately eligible, evidence-graded, settled work after this path. It does not authorize requests, replace ordinary payment, or permit an off-chain scorer to mint value.
+TOS has a fixed maximum gross supply of **500,000,000 TOS**. The bounded genesis validator bootstrap is included in that total; all remaining native issuance comes only from finalized blocks produced by elected validators through the protocol reward path. Service work, provider claims, and off-chain scores cannot create TOS.
 
 ## Agentic operations
 
