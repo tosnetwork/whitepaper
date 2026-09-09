@@ -49,7 +49,7 @@ Intent -> Authenticate -> Discover -> Match -> Quote -> Agreement
        -> Verify -> Settle or Dispute -> Return Result
 ```
 
-TOS has a fixed maximum gross supply of **500,000,000 TOS**. The bounded genesis validator bootstrap is included in that total; all remaining native issuance comes only from finalized blocks produced by elected validators through the protocol reward path. Service work, provider claims, and off-chain scores cannot create TOS.
+TOS has **no fixed maximum supply**. A bounded validator bootstrap creates **approximately 10,000,000 TOS** gross over roughly its first two years, after which governance targets a low perpetual issuance of **about 2% of the prevailing supply per year**. The bounded genesis validator bootstrap is included in the bootstrap total; all native issuance comes only from finalized blocks produced by elected validators through the protocol reward path. Service work, provider claims, and off-chain scores cannot create TOS.
 
 ## Agentic operations
 

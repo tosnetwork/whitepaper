@@ -90,10 +90,12 @@ parties need a tamper-resistant source of truth.
 The implemented foundation, TOS Core, is an actor-model blockchain with native TVM execution,
 value-bearing asynchronous messages, masterchain-rooted consensus, dynamic sharding and
 ADNL/DHT/RLDP networking. The open Intent, Agreement and Agentic Operation protocols, SDKs,
-conformance suites and most service profiles are partial or planned. TOS has a fixed maximum
-supply of 500 million TOS. The bounded genesis bootstrap is included in that total; all
-remaining native issuance comes only from finalized blocks produced by elected validators
-through the protocol reward path. Service activity and off-chain scoring cannot create TOS.
+conformance suites and most service profiles are partial or planned. TOS has no fixed maximum
+supply: a bounded validator bootstrap creates approximately 10 million TOS over roughly two
+years, after which governance targets a low perpetual issuance of about two percent of the
+prevailing supply per year. The genesis bootstrap is included in the bootstrap total; all
+native issuance comes only from finalized blocks produced by elected validators through the
+protocol reward path. Service activity and off-chain scoring cannot create TOS.
 \end{abstract}
 
 \section*{Document Status}
@@ -353,7 +355,8 @@ should show at least:
   \item spam rejection, bond refund and false-positive rates by communication profile;
   \item concentration of settled value, validator stake and validator rewards after
         common-control aggregation; and
-  \item cumulative validator-led native creation against the fixed 500-million-TOS cap.
+  \item cumulative validator-led native creation against the published bootstrap and
+        steady-state issuance targets.
 \end{itemize}
 
 Subsidized circular volume, address count, message count and declared capacity are not
@@ -911,7 +914,7 @@ caller or declare its own economic statement final \\
 Trust, Evidence and Economy &
 Anchor identity and capability commitments; manage reputation references, budgets, escrow,
 payments, Receipt verification, proofs, disputes, refunds and final settlement; enforce
-fixed-supply accounting and validator-reward policy &
+native-issuance accounting and validator-reward policy &
 Economic state follows accepted policy and verified evidence; a gateway, provider, indexer or
 analytics service cannot mint, move or finalize value by assertion \\
 Decentralized Network Foundation &
@@ -2399,7 +2402,7 @@ The practical sequence is:
   \item demonstrate cross-provider conformance, low-cost settlement and non-subsidized
         retention;
   \item publish the decentralization, operating-funding and governance path; and
-  \item operate validator rewards transparently within the fixed supply cap.
+  \item operate validator rewards transparently within the published emission policy.
 \end{enumerate}
 
 This sequencing follows a general crypto product discipline: a token may amplify an existing
@@ -2438,48 +2441,53 @@ the protocol's complaint and penalty rules.
 
 \subsection{Supply Policy}
 
-The maximum gross native supply is fixed at exactly 500,000,000 TOS. The entire supply is
-allocated through the validator-led network launch and reward path. A provisional 101,000 TOS
-genesis bootstrap establishes the original validator set and the Elector and Configuration
-contracts; it is included within the cap. The remaining 499,899,000 TOS may be created only
-through finalized block production and distributed through the elected-validator reward path.
-There is no separate service-work, proof-of-work, team, investor, foundation or treasury
-issuance allocation. The production policy is:
+TOS has no fixed maximum supply. Native issuance follows a two-phase policy: a bounded
+validator bootstrap that creates approximately 10,000,000 TOS gross over roughly its first
+two years, followed by a low perpetual issuance that governance targets at about two percent
+of the prevailing supply per year. All native creation is allocated through the validator-led
+network launch and finalized-block reward path. A provisional 101,000 TOS genesis bootstrap
+establishes the original validator set and the Elector and Configuration contracts; it is
+included within the bootstrap total. The remaining approximately 9,899,000 TOS of the
+bootstrap may be created only through finalized block production and distributed through the
+elected-validator reward path. There is no separate service-work, proof-of-work, team,
+investor, foundation or treasury issuance allocation. The production policy is:
 
-\begin{longtable}{L{0.48\textwidth}L{0.38\textwidth}}
+\begin{longtable}{L{0.52\textwidth}L{0.38\textwidth}}
 \toprule
 Item & Policy target \\
 \midrule
 \endhead
 Smallest unit & 1 \nanotos \\
 Unit conversion & 1 TOS = 1,000,000,000 \nanotos \\
-Fixed maximum gross native supply & 500,000,000 TOS \\
-Total validator-led allocation, including genesis bootstrap & 500,000,000 TOS \\
+Provisional total genesis creation & 101,000 TOS \\
+Two-year validator bootstrap target, gross, including genesis & Approximately 10,000,000 TOS \\
 Provisional main-wallet genesis balance & 100,000 TOS \\
 Elector operating reserve & 500 TOS \\
 Configuration-contract operating reserve & 500 TOS \\
-Provisional total genesis creation & 101,000 TOS \\
-Reference post-genesis validator creation & 499,899,000 TOS \\
+Reference post-genesis bootstrap creation & Approximately 9,899,000 TOS \\
 Proof-of-work giver allocation & 0 TOS \\
 Team, investor, foundation and treasury allocation & 0 TOS \\
-Target validator distribution duration & Approximately seven years \\
+Target bootstrap distribution duration & Approximately two years \\
+Steady-state issuance after bootstrap & Approximately 2\% of prevailing supply per year \\
 Treatment of network outages & No creation and no later catch-up \\
-Reward termination & Creation stops at the fixed cap; ConfigParam 14 is tapered or set to zero \\
-Required hard consensus supply cap & 500,000,000 TOS \\
+Reward continuity & Perpetual; governance sets ConfigParam 14 to track the target rate \\
+Fixed maximum supply cap & None \\
 \bottomrule
 \end{longtable}
 
-The 500-million-TOS limit is a monetary invariant, not a calibration target. Gross native
-creation includes the genesis bootstrap and every later validator block reward, including
-amounts subsequently burned. Consensus must reject any transition that would raise gross
-native creation above the cap. The distribution duration remains an approximate policy target:
-its completion date depends on finalized block production, shard behavior, validator
-availability and configured reward values, but those variables cannot increase the maximum
-supply.
+The approximately 10-million-TOS two-year figure is a calibration target, not a hard cap.
+Gross native creation includes the genesis bootstrap and every later validator block reward,
+including amounts subsequently burned. Its realized value depends on finalized block
+production, shard behavior, validator availability and configured reward values. After the
+bootstrap, governance re-parameterizes ConfigParam 14 so that continuing annual creation
+tracks approximately two percent of the prevailing supply, a low perpetual issuance that
+compensates elected validators for continuing to secure the network. The two-percent figure
+is a disclosed governance target adjustable through ordinary configuration governance, not a
+consensus-frozen constant.
 
 \subsection{Genesis Bootstrap and Allocation}
 
-Within the fixed 500-million-TOS cap, the production zerostate provisionally creates 101,000
+The production zerostate provisionally creates 101,000
 TOS: a bounded 100,000-TOS
 validator-bootstrap main wallet and 500-TOS operating reserves for each of the Elector and
 Configuration contracts. It contains no proof-of-work giver, faucet, discretionary mint
@@ -2503,8 +2511,8 @@ code and are not validator rewards or discretionary allocations.
 
 \subsection{Validator-Led Native Creation}
 
-Post-genesis native creation uses the block-value and Elector path and is bounded by the
-remaining headroom below the fixed 500-million-TOS cap:
+Post-genesis native creation uses the block-value and Elector path and is governed by the
+configured ConfigParam 14 reward values:
 
 \begin{center}
 \texttt{ConfigParam 14 block creation}\\
@@ -2542,13 +2550,15 @@ independent of the amount controlled.
 A validator must submit a valid bid, be selected, keep its stake locked, operate its assigned
 consensus responsibilities and remain eligible under the protocol rules. Native block
 creation and collected transaction fees are different economic flows: only ConfigParam 14
-creation increases gross native supply, while fees transfer existing TOS. No validator reward
-may be created once the remaining cap headroom reaches zero.
+creation increases gross native supply, while fees transfer existing TOS. Native creation is
+perpetual: its rate is set by the configured ConfigParam 14 values that governance tracks to
+the published issuance target, first for the two-year bootstrap and then for the steady-state
+inflation rate.
 
 \subsection{Validator Distribution Schedule}
 
-The reference post-genesis validator creation target is 499,899,000 TOS. For calibration,
-the expected creation rate is modeled as
+The reference post-genesis validator creation target for the two-year bootstrap is
+approximately 9,899,000 TOS. For calibration, the expected creation rate is modeled as
 
 \[
   \dot S =
@@ -2563,12 +2573,14 @@ the configured basechain value. Depth adjustment is intended to keep aggregate b
 creation approximately stable across balanced shard splits, but actual finalized chain data
 remains authoritative.
 
-The current implementation candidate uses 0.569879384 TOS per masterchain block and
-0.335223167 TOS per unsplit-basechain block. At the locally measured reference rate of
+The current implementation candidate uses 0.039496630 TOS per masterchain block and
+0.023233312 TOS per unsplit-basechain block. At the locally measured reference rate of
 approximately 2.5 finalized blocks per second for each chain, those values project nearly
-the full post-genesis target from August 1, 2026 to August 1, 2033. They are provisional
-until sustained multi-validator, multi-host, outage and shard split-and-merge measurements
-pass the published launch gates.
+the full bootstrap target over approximately two years from the mainnet genesis on
+September 15, 2026. They are provisional until sustained multi-validator, multi-host, outage
+and shard split-and-merge measurements pass the published launch gates. At the end of the
+bootstrap, governance lowers these values so that continuing creation tracks approximately
+two percent of the prevailing supply per year.
 
 Issuance is event-based:
 
@@ -2578,17 +2590,18 @@ Issuance is event-based:
 
 An outage, partition, failed election or delayed restart creates no issuance debt. There is
 no backfill, catch-up multiplier, anniversary tranche, pending-emission queue or automatic
-extension of a seven-year calendar. Faster block production can reach the target earlier;
-slower production can reach it later. These outcomes must be measured and disclosed rather
-than described as protocol faults.
+extension of the two-year bootstrap calendar. Faster block production can reach the bootstrap
+target earlier; slower production can reach it later. These outcomes must be measured and
+disclosed rather than described as protocol faults.
 
-Governance must monitor finalized creation and begin a public taper review before gross native
-creation reaches 495 million TOS. It may reduce ConfigParam 14 to manage the approach to the
-cap and must set both masterchain and basechain creation values to zero before the cap is
-exhausted. Consensus-enforced remaining-supply arithmetic is the final backstop: the reward for
-a block cannot exceed the remaining headroom. Transaction and service fees continue after
-native creation stops. No governance or configuration action may restart creation above the
-fixed 500-million-TOS maximum.
+Governance must monitor finalized creation and, as the bootstrap approaches its
+approximately 10-million-TOS target, conduct a public review to re-parameterize ConfigParam
+14 for the steady-state phase. Rather than tapering to zero, the masterchain and basechain
+creation values are lowered so that continuing annual creation tracks approximately two
+percent of the prevailing supply. Transaction and service fees are a separate flow and are
+unaffected. Every such re-parameterization is an ordinary authenticated configuration change
+that must disclose its proposer, old and proposed values, activation conditions and expected
+supply impact.
 
 \subsection{Broad Distribution and Concentration Controls}
 
@@ -2733,11 +2746,13 @@ important contributor among several after product-market fit and operational saf
 
 Ordinary authenticated configuration governance retains the ability to change block-reward
 rates, validator counts, stake limits, election timing and other configurable protocol
-parameters within the fixed supply invariant. Every monetary proposal should disclose its
-proposer, old and proposed values, activation conditions, expected supply impact and recorded
-votes. Governance can alter the rate and timing of validator distribution, but it cannot
-authorize gross native creation above 500,000,000 TOS. Configuration authority remains a
-material security and distribution risk even though the maximum supply is fixed.
+parameters, including the ConfigParam 14 values that set the native issuance rate. Every
+monetary proposal should disclose its proposer, old and proposed values, activation
+conditions, expected supply impact and recorded votes. Governance sets the rate and timing of
+validator distribution, including the transition from the two-year bootstrap to the
+approximately two-percent steady-state issuance. Because supply is not capped, configuration
+authority over the issuance rate is a material monetary, security and distribution risk, and
+every change to it must be disclosed and justified against the published issuance policy.
 
 Public descriptions of TOS must be accurate, balanced and consistent with released code and
 accepted network configuration. They must separate implemented functions from plans, avoid
@@ -2882,11 +2897,11 @@ Domain state machines, deposits, cancellation, fulfillment and dispute \\
 Physical AI terminal &
 \planned &
 Offline operation, safe updates, real-time priority, isolation and fleet management \\
-Validator-led native creation and fixed supply &
+Validator-led native creation and issuance policy &
 \partialstatus &
 ConfigParam 14 and Elector reward foundations exist; consensus-enforced inclusion of genesis
-creation, remaining-cap clipping and the 500-million-TOS terminal boundary require release
-tests and independent review \\
+creation, cumulative issuance accounting and tracking of the bootstrap and steady-state rates
+require release tests and independent review \\
 Pooled-stake contract and tooling &
 \partialstatus &
 Application-layer arrangement, not a protocol feature; no general user entry point and no
@@ -2935,9 +2950,9 @@ suites must cover:
   \item actuator isolation, local safety override, fleet revocation and bounded command
         fan-out;
   \item validator-reward arithmetic, genesis inclusion, cumulative native-creation accounting,
-        remaining-cap clipping and exact termination at 500,000,000 TOS; and
+        and correct tracking of the calibrated bootstrap and steady-state issuance rates; and
   \item adversarial reward-parameter changes, shard split and merge behavior, block-rate
-        variation, outages, restarts and attempts to create supply after the cap is reached.
+        variation, outages, restarts and unauthorized changes to the ConfigParam 14 issuance rate.
 \end{itemize}
 
 Release gates include a public threat model, protocol conformance vectors, reproducible
@@ -2960,13 +2975,14 @@ An operation revision is frozen only after:
 A new implementation may add a provider, transport or optimization without changing the
 operation revision. A semantic or economic incompatibility requires a new revision.
 
-\subsection{Fixed-Supply Gate}
+\subsection{Emission Accounting Gate}
 
 Before production launch, independently verify that zerostate creation and every validator
-reward share one cumulative gross-supply counter and that no block, shard transition,
-configuration change, restart or governance action can raise it above 500,000,000 TOS. Test
-the final partial reward below the cap, the first block after exhaustion, reward-rate changes,
-outages and shard split-and-merge behavior. A failed or delayed gate creates no issuance debt.
+reward share one cumulative gross-supply counter, that the counter stays accurate across
+blocks, shard transitions, configuration changes and restarts, and that the calibrated
+ConfigParam 14 values match the published bootstrap target and steady-state issuance rate.
+Test reward-rate changes, the bootstrap-to-steady-state re-parameterization, outages and
+shard split-and-merge behavior. A failed or delayed gate creates no issuance debt.
 
 \section{Roadmap}
 
@@ -3050,11 +3066,11 @@ orchestration after operation and cleanup invariants are stable.
 
 \subsection{Cross-Cutting Monetary Gate}
 
-Keep the fixed supply invariant independent of service activity. Validator rewards compensate
+Keep the native-issuance policy independent of service activity. Validator rewards compensate
 consensus participation and cannot depend on paid communication, model output, self-generated
 traffic, provider claims or any off-chain score. Production launch requires independently
-reproduced supply accounting, cap-boundary tests, transparent reward parameters and a public
-plan for validator security after native creation stops.
+reproduced supply accounting, issuance-rate calibration tests, transparent reward parameters
+and a public plan for sustaining validator security on the low perpetual issuance.
 
 \section{Non-Goals}
 
@@ -3148,7 +3164,8 @@ Architecture alone is not adoption. The proof must come from machine-checkable w
 organic demand, third-party embedding, cross-provider completion and a measured advantage for
 TOS coordination and settlement. Validator issuance secures consensus; it does not create
 customer demand. Its rate and distribution must remain transparent, and gross native creation
-must never exceed the fixed 500-million-TOS maximum.
+must track the published issuance policy: an approximately 10-million-TOS two-year bootstrap
+followed by a low perpetual issuance near two percent of the prevailing supply per year.
 
 \begin{center}
 \textbf{The Internet connected computers. TOS connects autonomous agents.}
