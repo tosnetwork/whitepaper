@@ -87,8 +87,8 @@ TOS Network 则构建跨 Agent 基础设施，使不同主体控制的 Agent 能
 证据等级与追索机制。 \\
 \textbf{资金来源} &
 以协议发行驱动：矿工收入主要来自 TAO/Alpha 协议发行；外部付费需求因 Subnet 而异。 &
-需求优先：服务提供者通过 escrow 和 settlement 获得服务收入。新增 TOS 仅来自固定
-5 亿枚总量上限内的 Validator 区块奖励，与服务活动相互独立。 \\
+需求优先：服务提供者通过 escrow 和 settlement 获得服务收入。新增 TOS 仅来自
+Validator 区块奖励（头两年引导期合计约 1,000 万枚，此后由治理按约 2\% 年发行设定），与服务活动相互独立。 \\
 \textbf{谁判断工作价值} &
 各 Subnet 的 Validator 按其激励机制评价矿工，提交的权重进入 Yuma Consensus 并影响奖励。 &
 每个 Agreement 定义自己的证据和验收政策。Verifier 评估该笔交易要求的声明，但服务评分
@@ -169,8 +169,8 @@ Metering 不要求费用必须大于零。 &
 TOS 连接服务收入与可执行结算；Bittensor 的原生经济引擎主要分配协议激励。 \\
 \rowcolor{tosgray}
 \textbf{激励的作用} &
-普通付费需求向服务提供者付款。新增 TOS 仅补偿当选 Validator 的共识参与，并受固定
-5 亿枚最大供应量约束。 &
+普通付费需求向服务提供者付款。新增 TOS 仅补偿当选 Validator 的共识参与；
+没有固定供应上限，发行由 ConfigParam 14 与治理设定。 &
 协议发行是奖励 Subnet Owner、矿工、Validator 和 Staker 的核心机制。 &
 TOS 将服务收入与 Validator 安全奖励分开；Bittensor 用发行启动并协调数字商品的生产与评价。 \\
 \textbf{区块链的作用} &
@@ -269,14 +269,14 @@ Subnet Alpha Token &
 TOS 没有对应物；TOS 仅使用一个原生资产，不为各 Profile 发行独立 Token。 \\
 Subnet 发行分配 &
 奖励路由 &
-TOS 没有对应物；TOS Validator 奖励属于全局共识安全政策，受固定 5 亿枚供应上限约束，
+TOS 没有对应物；TOS Validator 奖励属于全局共识安全政策，由 ConfigParam 14 统一设定，
 不按 Workchain 或服务类别发行。 \\
 \bottomrule
 \end{longtable}
 
 一个具有持续流量的垂直领域未来可以部署到专用 Workchain 以隔离吞吐量，表面上可能类似
 承载单一服务经济的 Subnet。即使如此，Workchain 仍只提供执行容量：服务定义与商业条款属于
-Operation Layer，Validator 奖励则保持协议级、全局且受供应上限约束。简言之，两者各自拥有
+Operation Layer，Validator 奖励则保持协议级、全局且由统一的发行政策约束。简言之，两者各自拥有
 另一方没有的维度：TOS 具有执行分片但没有按市场划分的 Token Economics；Bittensor 具有
 按市场划分的 Token Economics，但没有执行分片。
 
